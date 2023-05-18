@@ -14,7 +14,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  console.log("testing");
   return (
     <html lang="en">
       <ProviderComponent>
