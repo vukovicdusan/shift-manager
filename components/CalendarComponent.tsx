@@ -14,9 +14,9 @@ import { selectDatesHandler } from "@/helpers/shiftHandlers/selectDatesHandler";
 import { eventClickHandler } from "@/helpers/shiftHandlers/eventClickHandler";
 import { renderEventContent } from "@/helpers/shiftHandlers/renderEventContent";
 
-const Calendar = () => {
+const CalendarComponent = () => {
   const shifts = useAppSelector((state) => state.shifts);
-  console.log(shifts);
+  // console.log(shifts);
 
   // const selectDatesHandler = (selectInfo: DateSelectArg) => {
   //   console.log(selectInfo);
@@ -64,4 +64,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default CalendarComponent;

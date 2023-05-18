@@ -1,3 +1,4 @@
+import ProviderComponent from "@/store/provider";
 import "../styles/globals.css";
 import { Inter } from "next/font/google";
 
@@ -13,9 +14,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log("testing");
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <ProviderComponent>
+        <body className={inter.className}>{children}</body>
+      </ProviderComponent>
     </html>
   );
 }

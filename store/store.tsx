@@ -1,3 +1,4 @@
+"use client";
 import { configureStore } from "@reduxjs/toolkit";
 import workerSlice from "./slices/workerSlice";
 import shiftSlice from "./slices/shiftSlice";
