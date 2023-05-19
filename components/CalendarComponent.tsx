@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -9,32 +9,27 @@ import {
   EventClickArg,
   EventContentArg,
 } from "@fullcalendar/core";
-import { useAppSelector } from "@/store/hooks";
-import { selectDatesHandler } from "@/helpers/shiftHandlers/selectDatesHandler";
+// import { useAppSelector } from "@/store/hooks";
+// import { selectDatesHandler } from "@/helpers/shiftHandlers/selectDatesHandler";
 import { eventClickHandler } from "@/helpers/shiftHandlers/eventClickHandler";
 import { renderEventContent } from "@/helpers/shiftHandlers/renderEventContent";
+import { ShiftType } from "@/types/ShiftType";
+import { useDispatch } from "react-redux";
+import { openModal } from "@/store/slices/modalSlice";
+import { useAppSelector } from "@/store/hooks";
+// import { fetchShifts } from "@/store/slices/shiftSlice";
 
-const CalendarComponent = () => {
-  const shifts = useAppSelector((state) => state.shifts);
-  // console.log(shifts);
+const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
+  const dispatch = useDispatch();
 
-  // const selectDatesHandler = (selectInfo: DateSelectArg) => {
-  //   console.log(selectInfo);
-  // };
-
-  // const eventClickHandler = (clickInfo: EventClickArg) => {
-  //   console.log(clickInfo.event.extendedProps);
-  // };
-
-  // function renderEventContent(shiftInfo: EventContentArg) {
-  //   console.log(shiftInfo);
-  //   return (
-  //     <>
-  //       <p>{shiftInfo.timeText}</p>
-  //       <p>{shiftInfo.event.title}</p>
-  //     </>
-  //   );
-  // }
+  const selectDatesHandler = (selectInfo: DateSelectArg) => {
+    dispatch(
+      openModal({
+        isOpen: true,
+        data: { start: selectInfo.startStr, end: selectInfo.endStr },
+      })
+    );
+  };
 
   return (
     <FullCalendar

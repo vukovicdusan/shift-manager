@@ -1,23 +1,21 @@
 import CalendarComponent from "@/components/CalendarComponent";
+import Modal from "@/components/Modal";
 import Region from "@/components/Region";
 import Wrapper from "@/components/Wrapper";
 import { getShifts } from "@/helpers/shiftHandlers/getShifts";
 
-export default function Home() {
-  const fetchShifts = async () => {
-    const shifts = await getShifts();
-    console.log("it alive", shifts);
-  };
-
-  fetchShifts();
-
+const Home = async () => {
+  const shifts = await getShifts();
   return (
     <main>
       <Region>
         <Wrapper>
-          <CalendarComponent></CalendarComponent>
+          <CalendarComponent shifts={shifts}></CalendarComponent>
+          <Modal></Modal>
         </Wrapper>
       </Region>
     </main>
   );
-}
+};
+
+export default Home;

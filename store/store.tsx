@@ -2,11 +2,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import workerSlice from "./slices/workerSlice";
 import shiftSlice from "./slices/shiftSlice";
+import modalSlice from "./slices/modalSlice";
 
 export const store = configureStore({
   reducer: {
     shifts: shiftSlice,
     workers: workerSlice,
+    modal: modalSlice,
   },
 });
 

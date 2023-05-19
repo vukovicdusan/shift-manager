@@ -1,5 +1,12 @@
-import { DateSelectArg } from "@fullcalendar/core";
+// import { openModal } from "@/store/slices/modalSlice";
+// import { DateSelectArg } from "@fullcalendar/core";
+// import { useDispatch } from "react-redux";
 
-export const selectDatesHandler = (selectInfo: DateSelectArg) => {
-  console.log(selectInfo);
-};
+// const selectDatesHandler = (selectInfo: DateSelectArg) => {
+//   dispatch(
+//     openModal({
+//       isOpen: true,
+//       data: { start: selectInfo.startStr, end: selectInfo.endStr },
+//     })
+//   );
+// };

@@ -1,0 +1,65 @@
+.modal {
+  position: fixed;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  overflow: auto;
+  opacity: 1;
+  /* animation: ${(props) => (props.show ? "fadeIn .4s forwards" : "")}; */
+  transition: all 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.modal dialog {
+  display: block;
+  background-color: var(--background-light);
+  color: revert;
+  border: none;
+  border-radius: 5px;
+  padding: var(--s2) var(--s1);
+  margin-block: auto;
+  /* animation: ${(props) => (props.show ? "slideDown .8s forwards" : "")}; */
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-500px);
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.modal-close svg {
+  fill: var(--secondary);
+  transition: fill 0.2s ease;
+}
+
+.modal-close svg:hover {
+  fill: var(--primary);
+}
