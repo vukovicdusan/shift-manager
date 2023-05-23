@@ -1,7 +1,8 @@
 import CalendarComponent from "@/components/CalendarComponent";
-import Modal from "@/components/Modal";
+import Modal from "@/components/Modal/Modal";
 import Region from "@/components/Region";
 import Wrapper from "@/components/Wrapper";
+import AddShiftForm from "@/components/forms/AddShiftForm/AddShiftForm";
 import { getShifts } from "@/helpers/shiftHandlers/getShifts";
 
 const Home = async () => {
@@ -11,7 +12,9 @@ const Home = async () => {
       <Region>
         <Wrapper>
           <CalendarComponent shifts={shifts}></CalendarComponent>
-          <Modal></Modal>
+          <Modal>
+            <AddShiftForm></AddShiftForm>
+          </Modal>
         </Wrapper>
       </Region>
     </main>

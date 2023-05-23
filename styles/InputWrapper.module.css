@@ -1,0 +1,15 @@
+.inputWrapper,
+.inputWrapperColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputWrapperColumn {
+  flex-direction: column;
+}
+
+.inputWrapper label,
+.inputWrapperColumn label {
+  color: var(--text-light);
+}

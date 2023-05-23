@@ -52,6 +52,7 @@ blockquote,
 dl,
 dd {
   margin: 0;
+  color: var(--text-light);
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
@@ -72,8 +73,6 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  color: var(--text-light);
-  background: var(--background-dark);
 }
 
 /* A elements that don't have a class get default styles */
@@ -82,7 +81,6 @@ a:not([class]) {
 }
 
 a {
-  color: var(--text-dark);
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
@@ -146,7 +144,8 @@ button:disabled {
 /** ==== RESET UP ====*/
 
 body {
-  color: var(--text-dark);
+  color: var(--text-light);
+  background: var(--background-dark);
 }
 
 h1,

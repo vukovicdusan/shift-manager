@@ -1,0 +1,8 @@
+.dFlex {
+  --gap: 0;
+  --align-content: flex-start;
+  display: flex;
+  justify-content: var(--align-content);
+  align-items: center;
+  gap: var(--gap);
+}

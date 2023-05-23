@@ -1,9 +1,8 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import styles from "../styles/RegionWrapper.module.css";
-interface RegionProps {
-  children: ReactNode;
-}
-const Region = (props: RegionProps) => {
+import { ChildrenPropsType } from "@/types/ChildrenPropsType";
+
+const Region = (props: ChildrenPropsType) => {
   return <section className={styles.region}>{props.children}</section>;
 };
 

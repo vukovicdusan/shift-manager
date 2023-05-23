@@ -1,0 +1,6 @@
+.wrap {
+  --gap: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}

@@ -47,7 +47,9 @@
   }
 }
 
-.modal-close {
+.closeIcon {
+  width: 20px;
+  height: 20px;
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -55,11 +57,11 @@
   cursor: pointer;
 }
 
-.modal-close svg {
-  fill: var(--secondary);
+.closeIcon {
+  fill: var(--text-light);
   transition: fill 0.2s ease;
 }
 
-.modal-close svg:hover {
+.closeIcon:hover {
   fill: var(--primary);
 }

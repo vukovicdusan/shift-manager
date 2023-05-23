@@ -1,0 +1,41 @@
+.accordion {
+}
+
+.accordionContent {
+  composes: stack from "@/styles/Stack.module.css";
+  --gap: var(--s-1);
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.accordionContent > * + * {
+  --stack-space: var(--s-5);
+}
+
+.accordionIcon {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-light);
+  transition: all 0.2s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.accordionToggle {
+  composes: dFlex from "@/styles/DFlex.module.css";
+  --gap: var(--s-1);
+  cursor: pointer;
+}
+
+.accordionToggle p {
+  transition: color 0.2s ease;
+}
+
+.accordionToggle:hover p,
+.accordionToggle:hover .accordionIcon {
+  color: var(--primary);
+  fill: var(--primary);
+}

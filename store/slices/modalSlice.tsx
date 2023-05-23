@@ -17,12 +17,9 @@ export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    // fetchShifts: (state, action: PayloadAction<ShiftType>) => {
-    //   state.push(action.payload);
-    // },
     openModal: (state, action: PayloadAction<ModalInitStateType>) => {
-      state = action.payload;
-      console.log("coming from modalSlice:", JSON.stringify(state));
+      state.isOpen = action.payload.isOpen;
+      state.data = action.payload.data;
     },
   },
 });
