@@ -9,7 +9,7 @@ import { WorkersCollectionType } from "@/types/WorkersCollectionType";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/store/slices/modalSlice";
-import { createShiftFirebase } from "@/helpers/createShiftFirebase";
+import { createShiftInFirebase } from "@/helpers/createShiftInFirebase";
 
 const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
   const { start, end } = useAppSelector((state) => state.modal.data);
@@ -19,7 +19,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
 
   const addShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createShiftFirebase(start, end, assignedWorkers);
+    createShiftInFirebase(start, end, assignedWorkers);
     dispatch(
       openModal({
         isOpen: false,
@@ -28,7 +28,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
     );
     setTimeout(() => {
       router.refresh();
-    }, 1000);
+    }, 500);
   };
 
   return (
