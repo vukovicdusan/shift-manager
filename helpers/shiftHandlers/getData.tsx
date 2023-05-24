@@ -1,5 +1,6 @@
 import { db } from "@/public/firebase/firebase";
 import { ShiftType } from "@/types/ShiftType";
+import { WorkersCollectionType } from "@/types/WorkersCollectionType";
 import { collection, getDocs } from "firebase/firestore";
 
 export const getShifts = async () => {
@@ -11,4 +12,15 @@ export const getShifts = async () => {
   });
 
   return shiftsArr;
+};
+
+export const getWorkers = async () => {
+  let workersArr: WorkersCollectionType[] = [];
+  const querySnapshot = await getDocs(collection(db, "workers"));
+  querySnapshot.forEach((doc) => {
+    const workersData = doc.data() as WorkersCollectionType;
+    workersArr.push(workersData);
+  });
+
+  return workersArr;
 };

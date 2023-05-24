@@ -27,7 +27,7 @@
 
 .modal dialog {
   display: block;
-  background-color: var(--background-light);
+  background-color: var(--background-dark);
   color: revert;
   border: none;
   border-radius: 5px;

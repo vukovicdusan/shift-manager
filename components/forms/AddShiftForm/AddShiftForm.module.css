@@ -1,6 +1,7 @@
 .form {
   composes: stack from "@/styles/Stack.module.css";
   padding: var(--s2);
+  background-color: var(--background-dark);
 }
 
 .inputWrapper {
