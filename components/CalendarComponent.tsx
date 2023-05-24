@@ -19,10 +19,22 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
   const dispatch = useDispatch();
 
   const selectDatesHandler = (selectInfo: DateSelectArg) => {
+    let existingEvents = selectInfo.view.calendar
+      .getEvents()
+      .filter((event) => event.startStr === selectInfo.startStr);
+    const alreadyAssignedWorkers: string[] = [];
+    existingEvents.map((e) => {
+      alreadyAssignedWorkers.push(e.title);
+    });
+
     dispatch(
       openModal({
         isOpen: true,
-        data: { start: selectInfo.startStr, end: selectInfo.endStr },
+        data: {
+          start: selectInfo.startStr,
+          end: selectInfo.endStr,
+          alreadyAssignedWorkers: alreadyAssignedWorkers,
+        },
       })
     );
   };

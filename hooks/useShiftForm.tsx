@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-const useAssignWorker = () => {
+const useShiftForm = () => {
   const [assignedWorkers, setAssignedWorkers] = useState<string[]>([]);
+  const [shiftType, setShiftType] = useState<string>("day");
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
@@ -11,7 +12,12 @@ const useAssignWorker = () => {
           prevState.filter((worker) => worker !== name)
         );
   };
-  return [assignedWorkers, inputHandler] as const;
+
+  const selectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setShiftType(e.target.value);
+  };
+
+  return [assignedWorkers, inputHandler, shiftType, selectHandler] as const;
 };
 
-export default useAssignWorker;
+export default useShiftForm;

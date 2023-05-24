@@ -19,7 +19,10 @@ const Modal = (props: ChildrenPropsType) => {
             <span
               onClick={() => {
                 dispatch(
-                  openModal({ isOpen: false, data: { start: "", end: "" } })
+                  openModal({
+                    isOpen: false,
+                    data: { start: "", end: "", alreadyAssignedWorkers: [] },
+                  })
                 );
               }}
               className="modal-close"
