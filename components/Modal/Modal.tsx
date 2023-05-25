@@ -9,7 +9,7 @@ import { openModal } from "@/store/slices/modalSlice";
 const Modal = (props: ChildrenPropsType) => {
   const modalStatus = useAppSelector((state) => state.modal.isOpen);
   const dispatch = useDispatch();
-
+  console.log(props.children);
   return (
     <>
       {modalStatus ? (

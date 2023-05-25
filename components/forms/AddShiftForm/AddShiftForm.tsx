@@ -60,25 +60,27 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
           <input type="text" id="end" name="end" value={end} readOnly={true} />
         </div>
       </div>
-      <Accordion title={"Pick Workers"}>
-        {unAssignedWorkers.map((worker, index) => (
-          <div key={index} className={styles.inputWrapper}>
-            <input
-              type="checkbox"
-              name={worker.name}
-              id={worker.name}
-              onChange={inputHandler}
-              value={worker.name}
-            />
-            <label htmlFor={worker.name}>{capitalize(worker.name)}</label>
-          </div>
-        ))}
-      </Accordion>
-      <div className={styles.inputWrapperColumn}>
-        <select onChange={selectHandler} name="shift-type" id="shift-type">
-          <option value="day">Day shift</option>
-          <option value="night">Night shift</option>
-        </select>
+      <div className={styles.flex}>
+        <Accordion title={"Pick Workers"}>
+          {unAssignedWorkers.map((worker, index) => (
+            <div key={index} className={styles.inputWrapper}>
+              <input
+                type="checkbox"
+                name={worker.name}
+                id={worker.name}
+                onChange={inputHandler}
+                value={worker.name}
+              />
+              <label htmlFor={worker.name}>{capitalize(worker.name)}</label>
+            </div>
+          ))}
+        </Accordion>
+        <div className={styles.inputWrapper}>
+          <select onChange={selectHandler} name="shift-type" id="shift-type">
+            <option value="day">Day shift</option>
+            <option value="night">Night shift</option>
+          </select>
+        </div>
       </div>
       <button>Add Shift</button>
     </form>

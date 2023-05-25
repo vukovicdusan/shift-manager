@@ -4,6 +4,10 @@
   background-color: var(--background-dark);
 }
 
+.form > * + * {
+  --stack-space: var(--s3);
+}
+
 .inputWrapper {
   composes: inputWrapper from "@/styles/InputWrapper.module.css";
 }
@@ -12,6 +16,16 @@
   composes: inputWrapperColumn from "@/styles/InputWrapper.module.css";
   justify-content: flex-start;
   align-items: flex-start;
+}
+
+.inputWrapper select {
+  cursor: pointer;
+}
+
+.flex {
+  composes: dFlex from "@/styles/DFlex.module.css";
+  --gap: var(--s1);
+  --justify: center;
 }
 
 .wrap {
