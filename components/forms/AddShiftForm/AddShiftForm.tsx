@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./AddShiftForm.module.css";
 import { capitalize } from "@/helpers/capitalize";
 import { useAppSelector } from "@/store/hooks";
@@ -10,8 +10,15 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/store/slices/modalSlice";
 import { createShiftInFirebase } from "@/helpers/createShiftInFirebase";
+import { editShiftInFirebase } from "@/helpers/editShiftInFirebase";
 
-const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
+const AddShiftForm = ({
+  workers,
+  type,
+}: {
+  workers: WorkersCollectionType[];
+  type: string;
+}) => {
   const { start, end, alreadyAssignedWorkers } = useAppSelector(
     (state) => state.modal.data
   );
@@ -27,7 +34,15 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
     dispatch(
       openModal({
         isOpen: false,
-        data: { start: "", end: "", alreadyAssignedWorkers: [] },
+        type: "",
+        data: {
+          start: "",
+          end: "",
+          alreadyAssignedWorkers: [],
+          id: "",
+          title: "",
+          classNames: [""],
+        },
       })
     );
     setTimeout(() => {
@@ -35,14 +50,22 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
     }, 200);
   };
 
+  const editShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await editShiftInFirebase(data);
+  };
+
   const unAssignedWorkers = workers.filter(
-    (worker) => !alreadyAssignedWorkers.includes(worker.name)
+    (worker) => !alreadyAssignedWorkers!.includes(worker.name)
   );
 
   return (
-    <form onSubmit={addShiftHandler} className={styles.form}>
+    <form
+      onSubmit={type === "add" ? addShiftHandler : editShiftHandler}
+      className={styles.form}
+    >
       <div className={styles.center}>
-        <h3>Assign Workers</h3>
+        <h3>{type === "add" ? "Assign Workers" : "Edit shift"}</h3>
       </div>
       <div className={styles.wrap}>
         <div className={styles.inputWrapperColumn}>

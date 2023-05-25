@@ -14,9 +14,7 @@ const Home = async () => {
       <Region>
         <Wrapper>
           <CalendarComponent shifts={shifts}></CalendarComponent>
-          <Modal>
-            <AddShiftForm workers={workers}></AddShiftForm>
-          </Modal>
+          <Modal workers={workers}></Modal>
         </Wrapper>
       </Region>
     </main>

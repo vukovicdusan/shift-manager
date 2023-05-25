@@ -9,7 +9,7 @@ import {
   EventClickArg,
   EventContentArg,
 } from "@fullcalendar/core";
-import { eventClickHandler } from "@/helpers/shiftHandlers/eventClickHandler";
+// import { eventClickHandler } from "@/helpers/shiftHandlers/eventClickHandler";
 import { renderEventContent } from "@/helpers/shiftHandlers/renderEventContent";
 import { ShiftType } from "@/types/ShiftType";
 import { useDispatch } from "react-redux";
@@ -18,6 +18,7 @@ import { openModal } from "@/store/slices/modalSlice";
 const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
   const dispatch = useDispatch();
 
+  //! MOVE CALENDAR HANDLERS TO THE CUSTOM HOOK
   const selectDatesHandler = (selectInfo: DateSelectArg) => {
     let existingEvents = selectInfo.view.calendar
       .getEvents()
@@ -26,14 +27,34 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
     const alreadyAssignedWorkers: string[] = existingEvents.map(
       (event) => event.title
     );
-
     dispatch(
       openModal({
         isOpen: true,
+        type: "add",
         data: {
           start: selectInfo.startStr,
           end: selectInfo.endStr,
           alreadyAssignedWorkers: alreadyAssignedWorkers,
+          id: "",
+          title: "",
+          classNames: [""],
+        },
+      })
+    );
+  };
+
+  const eventClickHandler = (clickInfo: EventClickArg) => {
+    dispatch(
+      openModal({
+        isOpen: true,
+        type: "edit",
+        data: {
+          start: clickInfo.event.startStr,
+          end: clickInfo.event.endStr,
+          alreadyAssignedWorkers: [""],
+          id: clickInfo.event.id,
+          title: clickInfo.event.title,
+          classNames: clickInfo.event.classNames,
         },
       })
     );

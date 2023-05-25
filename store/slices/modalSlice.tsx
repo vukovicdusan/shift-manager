@@ -4,12 +4,28 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface ModalInitStateType {
   isOpen: boolean;
-  data: { start: string; end: string; alreadyAssignedWorkers: string[] };
+  type: string;
+  data: {
+    start: string;
+    end: string;
+    alreadyAssignedWorkers: string[];
+    id: string;
+    title: string;
+    classNames: string[];
+  };
 }
 
 const initialState: ModalInitStateType = {
   isOpen: false,
-  data: { start: "", end: "", alreadyAssignedWorkers: [] },
+  type: "",
+  data: {
+    start: "",
+    end: "",
+    alreadyAssignedWorkers: [],
+    id: "",
+    title: "",
+    classNames: [""],
+  },
 };
 
 export const modalSlice = createSlice({
@@ -18,6 +34,7 @@ export const modalSlice = createSlice({
   reducers: {
     openModal: (state, action: PayloadAction<ModalInitStateType>) => {
       state.isOpen = action.payload.isOpen;
+      state.type = action.payload.type;
       state.data = action.payload.data;
     },
   },

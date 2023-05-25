@@ -5,14 +5,20 @@ import { useAppSelector } from "@/store/hooks";
 import { ChildrenPropsType } from "@/types/ChildrenPropsType";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/store/slices/modalSlice";
+import { WorkersCollectionType } from "@/types/WorkersCollectionType";
+import AddShiftForm from "../forms/AddShiftForm/AddShiftForm";
 
-const Modal = (props: ChildrenPropsType) => {
-  const modalStatus = useAppSelector((state) => state.modal.isOpen);
+type ModalProps = {
+  workers: WorkersCollectionType[];
+};
+
+const Modal = (props: ModalProps) => {
+  const { type, isOpen, data } = useAppSelector((state) => state.modal);
   const dispatch = useDispatch();
-  console.log(props.children);
+
   return (
     <>
-      {modalStatus ? (
+      {isOpen ? (
         <div className={styles.modal}>
           <dialog>
             {" "}
@@ -21,7 +27,15 @@ const Modal = (props: ChildrenPropsType) => {
                 dispatch(
                   openModal({
                     isOpen: false,
-                    data: { start: "", end: "", alreadyAssignedWorkers: [] },
+                    type: "",
+                    data: {
+                      start: "",
+                      end: "",
+                      alreadyAssignedWorkers: [],
+                      id: "",
+                      title: "",
+                      classNames: [""],
+                    },
                   })
                 );
               }}
@@ -31,7 +45,7 @@ const Modal = (props: ChildrenPropsType) => {
                 <use xlinkHref={"./svg/sprite.svg#close"}></use>
               </svg>
             </span>
-            {props.children}
+            {<AddShiftForm type={type} workers={props.workers}></AddShiftForm>}
           </dialog>
         </div>
       ) : null}
