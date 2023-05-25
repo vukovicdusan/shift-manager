@@ -22,10 +22,10 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
     let existingEvents = selectInfo.view.calendar
       .getEvents()
       .filter((event) => event.startStr === selectInfo.startStr);
-    const alreadyAssignedWorkers: string[] = [];
-    existingEvents.map((e) => {
-      alreadyAssignedWorkers.push(e.title);
-    });
+
+    const alreadyAssignedWorkers: string[] = existingEvents.map(
+      (event) => event.title
+    );
 
     dispatch(
       openModal({
