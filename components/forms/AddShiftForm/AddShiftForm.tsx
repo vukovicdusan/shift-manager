@@ -56,7 +56,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
       <div className={styles.center}>
         <h3>
           {isAddForm ? "Assign Workers" : "Edit shift for "}
-          {isAddForm ? "" : <span>{title}</span>}
+          {isAddForm ? "" : <span className={styles.title}>{title}</span>}
         </h3>
       </div>
       <div className={styles.wrap}>
@@ -83,7 +83,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
       </div>
       <div className={styles.flex}>
         {isAddForm ? (
-          <Accordion title={"Pick Workers"}>
+          <Accordion title={"Assign Workers"}>
             {unAssignedWorkers.map((worker, index) => (
               <div key={index} className={styles.inputWrapper}>
                 <input
@@ -101,13 +101,18 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
           ""
         )}
         <div className={styles.inputWrapper}>
-          <select onChange={selectHandler} name="shift-type" id="shift-type">
+          <select
+            defaultValue={classNames[0] === "night" ? "night" : "day"}
+            onChange={selectHandler}
+            name="shift-type"
+            id="shift-type"
+          >
             <option value="day">Day shift</option>
             <option value="night">Night shift</option>
           </select>
         </div>
       </div>
-      <div className={styles.flex}>
+      <div className={`${styles.flex} ${styles.buttonsFlex}`}>
         <button type="submit">{isAddForm ? "Add Shift" : "Edit Shift"}</button>
         {isAddForm ? (
           ""

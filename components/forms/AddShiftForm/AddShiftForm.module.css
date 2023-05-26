@@ -37,6 +37,11 @@
   composes: center from "@/styles/Center.module.css";
 }
 
+.buttonsFlex {
+  width: 100%;
+  --align: center;
+}
+
 .deleteButton {
   background-color: indianred;
 }
@@ -45,4 +50,8 @@
   opacity: 0.8;
   background-color: indianred;
   border-color: indianred;
+}
+
+.title {
+  color: var(--secondary);
 }
