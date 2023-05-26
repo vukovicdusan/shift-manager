@@ -30,7 +30,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
     dispatch(
       openModal({
         isOpen: true,
-        type: "add",
+        formType: "add",
         data: {
           start: selectInfo.startStr,
           end: selectInfo.endStr,
@@ -47,7 +47,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
     dispatch(
       openModal({
         isOpen: true,
-        type: "edit",
+        formType: "edit",
         data: {
           start: clickInfo.event.startStr,
           end: clickInfo.event.endStr,

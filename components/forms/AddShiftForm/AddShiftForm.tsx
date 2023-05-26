@@ -6,66 +6,58 @@ import { useAppSelector } from "@/store/hooks";
 import Accordion from "@/components/Accordion/Accordion";
 import useShiftForm from "@/hooks/useShiftForm";
 import { WorkersCollectionType } from "@/types/WorkersCollectionType";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { openModal } from "@/store/slices/modalSlice";
 import { createShiftInFirebase } from "@/helpers/createShiftInFirebase";
 import { editShiftInFirebase } from "@/helpers/editShiftInFirebase";
+import { deleteShiftFromFirebase } from "@/helpers/deleteShiftFromFirebase";
+import { useCloseModal } from "@/hooks/useCloseModal";
 
-const AddShiftForm = ({
-  workers,
-  type,
-}: {
-  workers: WorkersCollectionType[];
-  type: string;
-}) => {
-  const { start, end, alreadyAssignedWorkers } = useAppSelector(
-    (state) => state.modal.data
-  );
+const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
+  const {
+    formType,
+    data: { start, end, alreadyAssignedWorkers, id, title, classNames },
+  } = useAppSelector((state) => state.modal);
+
+  const [closeModal, reload] = useCloseModal();
 
   const [assignedWorkers, inputHandler, shiftType, selectHandler] =
     useShiftForm();
-  const router = useRouter();
-  const dispatch = useDispatch();
 
   const addShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     await createShiftInFirebase(start, end, assignedWorkers, shiftType);
-    dispatch(
-      openModal({
-        isOpen: false,
-        type: "",
-        data: {
-          start: "",
-          end: "",
-          alreadyAssignedWorkers: [],
-          id: "",
-          title: "",
-          classNames: [""],
-        },
-      })
-    );
-    setTimeout(() => {
-      router.refresh();
-    }, 200);
+    closeModal();
+    reload();
   };
 
   const editShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await editShiftInFirebase(data);
+    await editShiftInFirebase(id, start, end, shiftType);
+    closeModal();
+    reload();
+  };
+
+  const deleteShiftHandler = async () => {
+    await deleteShiftFromFirebase(id);
+    closeModal();
+    reload();
   };
 
   const unAssignedWorkers = workers.filter(
     (worker) => !alreadyAssignedWorkers!.includes(worker.name)
   );
 
+  const isAddForm = formType === "add";
+
   return (
     <form
-      onSubmit={type === "add" ? addShiftHandler : editShiftHandler}
+      onSubmit={formType === "add" ? addShiftHandler : editShiftHandler}
       className={styles.form}
     >
       <div className={styles.center}>
-        <h3>{type === "add" ? "Assign Workers" : "Edit shift"}</h3>
+        <h3>
+          {isAddForm ? "Assign Workers" : "Edit shift for "}
+          {isAddForm ? "" : <span>{title}</span>}
+        </h3>
       </div>
       <div className={styles.wrap}>
         <div className={styles.inputWrapperColumn}>
@@ -74,30 +66,40 @@ const AddShiftForm = ({
             type="text"
             id="start"
             name="start"
-            value={start}
-            readOnly={true}
+            defaultValue={start}
+            readOnly={isAddForm ? true : false}
           />
         </div>
         <div className={styles.inputWrapperColumn}>
           <label htmlFor="end">End</label>
-          <input type="text" id="end" name="end" value={end} readOnly={true} />
+          <input
+            type="text"
+            id="end"
+            name="end"
+            defaultValue={end}
+            readOnly={isAddForm ? true : false}
+          />
         </div>
       </div>
       <div className={styles.flex}>
-        <Accordion title={"Pick Workers"}>
-          {unAssignedWorkers.map((worker, index) => (
-            <div key={index} className={styles.inputWrapper}>
-              <input
-                type="checkbox"
-                name={worker.name}
-                id={worker.name}
-                onChange={inputHandler}
-                value={worker.name}
-              />
-              <label htmlFor={worker.name}>{capitalize(worker.name)}</label>
-            </div>
-          ))}
-        </Accordion>
+        {isAddForm ? (
+          <Accordion title={"Pick Workers"}>
+            {unAssignedWorkers.map((worker, index) => (
+              <div key={index} className={styles.inputWrapper}>
+                <input
+                  type="checkbox"
+                  name={worker.name}
+                  id={worker.name}
+                  onChange={inputHandler}
+                  value={worker.name}
+                />
+                <label htmlFor={worker.name}>{capitalize(worker.name)}</label>
+              </div>
+            ))}
+          </Accordion>
+        ) : (
+          ""
+        )}
         <div className={styles.inputWrapper}>
           <select onChange={selectHandler} name="shift-type" id="shift-type">
             <option value="day">Day shift</option>
@@ -105,7 +107,20 @@ const AddShiftForm = ({
           </select>
         </div>
       </div>
-      <button>Add Shift</button>
+      <div className={styles.flex}>
+        <button type="submit">{isAddForm ? "Add Shift" : "Edit Shift"}</button>
+        {isAddForm ? (
+          ""
+        ) : (
+          <button
+            type="button"
+            className={styles.deleteButton}
+            onClick={deleteShiftHandler}
+          >
+            Delete Shift
+          </button>
+        )}
+      </div>
     </form>
   );
 };

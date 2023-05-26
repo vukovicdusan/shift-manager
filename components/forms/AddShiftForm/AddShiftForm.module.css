@@ -36,3 +36,13 @@
 .center {
   composes: center from "@/styles/Center.module.css";
 }
+
+.deleteButton {
+  background-color: indianred;
+}
+
+.deleteButton:hover {
+  opacity: 0.8;
+  background-color: indianred;
+  border-color: indianred;
+}

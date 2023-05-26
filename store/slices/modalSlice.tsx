@@ -4,7 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface ModalInitStateType {
   isOpen: boolean;
-  type: string;
+  formType: string;
   data: {
     start: string;
     end: string;
@@ -17,7 +17,7 @@ interface ModalInitStateType {
 
 const initialState: ModalInitStateType = {
   isOpen: false,
-  type: "",
+  formType: "",
   data: {
     start: "",
     end: "",
@@ -34,7 +34,7 @@ export const modalSlice = createSlice({
   reducers: {
     openModal: (state, action: PayloadAction<ModalInitStateType>) => {
       state.isOpen = action.payload.isOpen;
-      state.type = action.payload.type;
+      state.formType = action.payload.formType;
       state.data = action.payload.data;
     },
   },

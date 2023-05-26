@@ -7,14 +7,15 @@ import { useDispatch } from "react-redux";
 import { openModal } from "@/store/slices/modalSlice";
 import { WorkersCollectionType } from "@/types/WorkersCollectionType";
 import AddShiftForm from "../forms/AddShiftForm/AddShiftForm";
+import { useCloseModal } from "@/hooks/useCloseModal";
 
 type ModalProps = {
   workers: WorkersCollectionType[];
 };
 
 const Modal = (props: ModalProps) => {
-  const { type, isOpen, data } = useAppSelector((state) => state.modal);
-  const dispatch = useDispatch();
+  const { isOpen } = useAppSelector((state) => state.modal);
+  const [closeModal] = useCloseModal();
 
   return (
     <>
@@ -22,30 +23,12 @@ const Modal = (props: ModalProps) => {
         <div className={styles.modal}>
           <dialog>
             {" "}
-            <span
-              onClick={() => {
-                dispatch(
-                  openModal({
-                    isOpen: false,
-                    type: "",
-                    data: {
-                      start: "",
-                      end: "",
-                      alreadyAssignedWorkers: [],
-                      id: "",
-                      title: "",
-                      classNames: [""],
-                    },
-                  })
-                );
-              }}
-              className="modal-close"
-            >
+            <span onClick={() => closeModal()} className="modal-close">
               <svg className={styles.closeIcon}>
                 <use xlinkHref={"./svg/sprite.svg#close"}></use>
               </svg>
             </span>
-            {<AddShiftForm type={type} workers={props.workers}></AddShiftForm>}
+            {<AddShiftForm workers={props.workers}></AddShiftForm>}
           </dialog>
         </div>
       ) : null}
