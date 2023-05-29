@@ -87,6 +87,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
       events={shifts}
       eventDisplay="block"
       eventContent={renderEventContent}
+      allDaySlot={false}
     />
   );
 };
