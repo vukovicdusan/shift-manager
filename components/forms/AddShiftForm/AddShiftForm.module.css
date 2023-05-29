@@ -43,13 +43,13 @@
 }
 
 .deleteButton {
-  background-color: indianred;
+  background-color: var(--error-color);
 }
 
 .deleteButton:hover {
   opacity: 0.8;
-  background-color: indianred;
-  border-color: indianred;
+  background-color: var(--error-color);
+  border-color: var(--error-color);
 }
 
 .title {

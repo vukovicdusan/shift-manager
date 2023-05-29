@@ -10,7 +10,7 @@ import {
   EventContentArg,
 } from "@fullcalendar/core";
 // import { eventClickHandler } from "@/helpers/shiftHandlers/eventClickHandler";
-import { renderEventContent } from "@/helpers/shiftHandlers/renderEventContent";
+import { renderEventContent } from "@/helpers/renderEventContent";
 import { ShiftType } from "@/types/ShiftType";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/store/slices/modalSlice";
@@ -76,11 +76,12 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
       //   year: "numeric",
       //   weekday: "long",
       // }}
+      // eventTimeFormat={}
       selectable={true}
       selectMirror={true}
       weekends={true}
       select={selectDatesHandler}
-      eventClick={eventClickHandler} //this should be used to edit a event
+      eventClick={eventClickHandler}
       events={shifts}
       eventDisplay="block"
       eventContent={renderEventContent}

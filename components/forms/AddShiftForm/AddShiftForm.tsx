@@ -6,9 +6,9 @@ import { useAppSelector } from "@/store/hooks";
 import Accordion from "@/components/Accordion/Accordion";
 import useShiftForm from "@/hooks/useShiftForm";
 import { WorkersCollectionType } from "@/types/WorkersCollectionType";
-import { createShiftInFirebase } from "@/helpers/createShiftInFirebase";
-import { editShiftInFirebase } from "@/helpers/editShiftInFirebase";
-import { deleteShiftFromFirebase } from "@/helpers/deleteShiftFromFirebase";
+import { createShiftInFirebase } from "@/helpers/shiftHandlers/createShiftInFirebase";
+import { editShiftInFirebase } from "@/helpers/shiftHandlers/editShiftInFirebase";
+import { deleteShiftFromFirebase } from "@/helpers/shiftHandlers/deleteShiftFromFirebase";
 import { useCloseModal } from "@/hooks/useCloseModal";
 
 const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
