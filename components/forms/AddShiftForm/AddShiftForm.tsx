@@ -10,6 +10,7 @@ import { createShiftInFirebase } from "@/helpers/shiftHandlers/createShiftInFire
 import { editShiftInFirebase } from "@/helpers/shiftHandlers/editShiftInFirebase";
 import { deleteShiftFromFirebase } from "@/helpers/shiftHandlers/deleteShiftFromFirebase";
 import { useCloseModal } from "@/hooks/useCloseModal";
+import { formatDate } from "fullcalendar";
 
 const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
   const {
@@ -47,6 +48,17 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
   );
 
   const isAddForm = formType === "add";
+
+  const formatMyDate = (date: string) => {
+    return formatDate(date, {
+      month: "numeric",
+      year: "numeric",
+      day: "numeric",
+      // timeZoneName: "short",
+      timeZone: "local",
+      locale: "sr",
+    });
+  };
 
   return (
     <form

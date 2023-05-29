@@ -20,6 +20,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
 
   //! MOVE CALENDAR HANDLERS TO THE CUSTOM HOOK
   const selectDatesHandler = (selectInfo: DateSelectArg) => {
+    console.log(selectInfo);
     let existingEvents = selectInfo.view.calendar
       .getEvents()
       .filter((event) => event.startStr === selectInfo.startStr);
@@ -27,6 +28,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
     const alreadyAssignedWorkers: string[] = existingEvents.map(
       (event) => event.title
     );
+
     dispatch(
       openModal({
         isOpen: true,
@@ -65,9 +67,9 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
       firstDay={1}
       headerToolbar={{
-        start: "prev, dayGridMonth,timeGridWeek,timeGridDay",
+        start: "prev dayGridMonth timeGridWeek timeGridDay",
         center: "title",
-        end: "today,next",
+        end: "today next",
       }}
       initialView="dayGridMonth"
       // titleFormat={{
@@ -78,7 +80,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
       // }}
       // eventTimeFormat={}
       selectable={true}
-      selectMirror={true}
+      // selectMirror={true}
       weekends={true}
       select={selectDatesHandler}
       eventClick={eventClickHandler}
