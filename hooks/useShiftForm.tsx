@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import { reformatMyDate } from "@/helpers/reformatMyDate";
+import { useAppSelector } from "@/store/hooks";
+import React, { ChangeEvent, useState } from "react";
 
 const useShiftForm = () => {
+  const { start, end } = useAppSelector((state) => state.modal.data);
   const [assignedWorkers, setAssignedWorkers] = useState<string[]>([]);
   const [shiftType, setShiftType] = useState<string>("day");
+  const [editedDate, setEditedDate] = useState({ start: start, end: end });
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
@@ -17,7 +21,21 @@ const useShiftForm = () => {
     setShiftType(e.target.value);
   };
 
-  return [assignedWorkers, inputHandler, shiftType, selectHandler] as const;
+  const editDateHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setEditedDate((prevState) => ({
+      ...prevState,
+      [e.target.name]: reformatMyDate(e.target.value),
+    }));
+  };
+
+  return [
+    assignedWorkers,
+    inputHandler,
+    shiftType,
+    selectHandler,
+    editedDate,
+    editDateHandler,
+  ] as const;
 };
 
 export default useShiftForm;

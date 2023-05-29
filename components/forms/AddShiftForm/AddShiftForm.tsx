@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import styles from "./AddShiftForm.module.css";
 import { capitalize } from "@/helpers/capitalize";
 import { useAppSelector } from "@/store/hooks";
@@ -10,7 +10,7 @@ import { createShiftInFirebase } from "@/helpers/shiftHandlers/createShiftInFire
 import { editShiftInFirebase } from "@/helpers/shiftHandlers/editShiftInFirebase";
 import { deleteShiftFromFirebase } from "@/helpers/shiftHandlers/deleteShiftFromFirebase";
 import { useCloseModal } from "@/hooks/useCloseModal";
-import { formatDate } from "fullcalendar";
+import { formatMyDate } from "@/helpers/formatMyDate";
 
 const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
   const {
@@ -20,8 +20,14 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
 
   const [closeModal, reload] = useCloseModal();
 
-  const [assignedWorkers, inputHandler, shiftType, selectHandler] =
-    useShiftForm();
+  const [
+    assignedWorkers,
+    inputHandler,
+    shiftType,
+    selectHandler,
+    editedDate,
+    editDateHandler,
+  ] = useShiftForm();
 
   const addShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +38,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
 
   const editShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await editShiftInFirebase(id, start, end, shiftType);
+    await editShiftInFirebase(id, editedDate.start, editedDate.end, shiftType);
     closeModal();
     reload();
   };
@@ -48,17 +54,6 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
   );
 
   const isAddForm = formType === "add";
-
-  const formatMyDate = (date: string) => {
-    return formatDate(date, {
-      month: "numeric",
-      year: "numeric",
-      day: "numeric",
-      // timeZoneName: "short",
-      timeZone: "local",
-      locale: "sr",
-    });
-  };
 
   return (
     <form
@@ -78,8 +73,11 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
             type="text"
             id="start"
             name="start"
-            defaultValue={start}
+            defaultValue={formatMyDate(start)}
             readOnly={isAddForm ? true : false}
+            onChange={editDateHandler}
+            pattern="\d{2}/\d{2}/\d{4}"
+            title="Please enter a date in the format 'DD/MM/YYYY'"
           />
         </div>
         <div className={styles.inputWrapperColumn}>
@@ -88,8 +86,11 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
             type="text"
             id="end"
             name="end"
-            defaultValue={end}
+            defaultValue={formatMyDate(end)}
             readOnly={isAddForm ? true : false}
+            onChange={editDateHandler}
+            pattern="\d{2}/\d{2}/\d{4}"
+            title="Please enter a date in the format 'DD/MM/YYYY'"
           />
         </div>
       </div>
