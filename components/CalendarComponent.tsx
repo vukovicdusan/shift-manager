@@ -14,18 +14,29 @@ import { renderEventContent } from "@/helpers/renderEventContent";
 import { ShiftType } from "@/types/ShiftType";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/store/slices/modalSlice";
+// import { adjustDateForDayShift } from "@/helpers/adjustDateForDayShift";
+// import { hoursRemover } from "@/helpers/hoursRemover";
 
 const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
   const dispatch = useDispatch();
 
   //! MOVE CALENDAR HANDLERS TO THE CUSTOM HOOK
   const selectDatesHandler = (selectInfo: DateSelectArg) => {
-    console.log(selectInfo);
-    let existingEvents = selectInfo.view.calendar
-      .getEvents()
-      .filter((event) => event.startStr === selectInfo.startStr);
+    const selectedStartDate = selectInfo.start;
+    const selectedEndDate = selectInfo.end;
 
-    const alreadyAssignedWorkers: string[] = existingEvents.map(
+    const allEvents = selectInfo.view.calendar.getEvents();
+
+    const intersectingEvents = allEvents.filter((event) => {
+      const eventStartDate = event.start;
+      const eventEndDate = event.end;
+
+      return (
+        selectedStartDate < eventEndDate! && selectedEndDate > eventStartDate!
+      );
+    });
+
+    const alreadyAssignedWorkers: string[] = intersectingEvents.map(
       (event) => event.title
     );
 
@@ -79,8 +90,8 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
       //   weekday: "long",
       // }}
       // eventTimeFormat={}
-      selectable={true}
       // selectMirror={true}
+      selectable={true}
       weekends={true}
       select={selectDatesHandler}
       eventClick={eventClickHandler}

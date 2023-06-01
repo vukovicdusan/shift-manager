@@ -1,0 +1,21 @@
+.form {
+  composes: stack from "@/styles/Stack.module.css";
+  --stack-align: center;
+}
+
+.center {
+  composes: center from "@/styles/Center.module.css";
+}
+
+.stack {
+  composes: stack from "@/styles/Stack.module.css";
+  --stack-align: center;
+}
+
+.stack > * + * {
+}
+
+.inputWrapperColumn {
+  composes: inputWrapperColumn from "@/styles/InputWrapper.module.css";
+  align-items: flex-start;
+}

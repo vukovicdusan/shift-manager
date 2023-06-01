@@ -1,6 +1,8 @@
 import ProviderComponent from "@/store/provider";
 import "../styles/globals.css";
 import { Inter } from "next/font/google";
+import Region from "@/components/Region";
+import Wrapper from "@/components/Wrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ProviderComponent>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <Region>
+            <Wrapper>
+              <main>{children}</main>
+            </Wrapper>
+          </Region>
+        </body>
       </ProviderComponent>
     </html>
   );
