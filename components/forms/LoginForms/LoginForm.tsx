@@ -1,21 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./LoginForm.module.css";
+import useLogin from "@/hooks/useLogin";
 
 const LoginForm = () => {
-  const [input, setInput] = useState({ email: "", password: "" });
-  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const [inputHandler, , loginHandler] = useLogin();
 
-  const loginHandler = () => {};
-
-  console.log(input);
   return (
-    <form className={styles.stack}>
+    <form onSubmit={loginHandler} className={styles.stack}>
       <div className={styles.center}>
         <h3>Login</h3>
       </div>
@@ -47,9 +39,7 @@ const LoginForm = () => {
           />
         </div>
       </div>
-      <button type="submit" onClick={loginHandler}>
-        Login
-      </button>
+      <button type="submit">Login</button>
     </form>
   );
 };

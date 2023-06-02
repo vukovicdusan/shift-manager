@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import Region from "@/components/Region";
 import Wrapper from "@/components/Wrapper";
+import Header from "@/components/Header.tsx/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <ProviderComponent>
         <body className={inter.className}>
+          <Header></Header>
           <Region>
             <Wrapper>
               <main>{children}</main>
