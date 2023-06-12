@@ -1,19 +1,14 @@
 "use client";
-import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/public/firebase/firebase";
 import { ChildrenPropsType } from "@/types/ChildrenPropsType";
+import useLogin from "@/hooks/useLogin";
 
 const ProtectedPage = (props: ChildrenPropsType) => {
-  const router = useRouter();
+  const [, , , , isAuthorized] = useLogin();
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        router.push("/login");
-      }
-    });
-    return () => unsubscribe();
+    isAuthorized();
+    return () => isAuthorized();
   }, []);
   if (!auth.currentUser) {
     return null;

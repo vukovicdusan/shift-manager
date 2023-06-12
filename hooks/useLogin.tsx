@@ -38,23 +38,21 @@ const useLogin = () => {
       .catch((error) => {});
   };
 
-  const checkUser = () => {
+  const isAuthorized = () => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
-        console.log("user is logged");
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        console.log("user is logged");
+      if (!user) {
+        router.push("/login");
       }
     });
   };
 
-  return [inputHandler, input, loginHandler, logoutHandler, checkUser] as const;
+  return [
+    inputHandler,
+    input,
+    loginHandler,
+    logoutHandler,
+    isAuthorized,
+  ] as const;
 };
 
 export default useLogin;

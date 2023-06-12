@@ -2,9 +2,6 @@
 import React from "react";
 import styles from "./Modal.module.css";
 import { useAppSelector } from "@/store/hooks";
-import { ChildrenPropsType } from "@/types/ChildrenPropsType";
-import { useDispatch } from "react-redux";
-import { openModal } from "@/store/slices/modalSlice";
 import { WorkersCollectionType } from "@/types/WorkersCollectionType";
 import AddShiftForm from "../forms/AddShiftForm/AddShiftForm";
 import { useCloseModal } from "@/hooks/useCloseModal";
