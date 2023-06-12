@@ -8,14 +8,16 @@ import { ChildrenPropsType } from "@/types/ChildrenPropsType";
 const ProtectedPage = (props: ChildrenPropsType) => {
   const router = useRouter();
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-      } else {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
         router.push("/login");
       }
     });
-  });
+    return () => unsubscribe();
+  }, []);
+  if (!auth.currentUser) {
+    return null;
+  }
   return <>{props.children}</>;
 };
 

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { auth } from "@/public/firebase/firebase";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 const useLogin = () => {
@@ -16,6 +20,7 @@ const useLogin = () => {
 
   const loginHandler = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("login handler called");
     signInWithEmailAndPassword(auth, input.email, input.password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -29,15 +34,27 @@ const useLogin = () => {
 
   const logoutHandler = () => {
     signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
+      .then(() => {})
+      .catch((error) => {});
   };
 
-  return [inputHandler, input, loginHandler, logoutHandler] as const;
+  const checkUser = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        console.log("user is logged");
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        console.log("user is logged");
+      }
+    });
+  };
+
+  return [inputHandler, input, loginHandler, logoutHandler, checkUser] as const;
 };
 
 export default useLogin;

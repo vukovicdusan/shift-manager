@@ -1,3 +1,62 @@
 .header {
   composes: dFlex from "@/styles/DFlex.module.css";
+  padding: var(--s-2);
+  --justify: space-between !important;
+  --align: center !important;
+  inline-size: 100%;
+}
+
+.header img {
+  object-fit: contain;
+}
+
+.icon {
+  width: 17px;
+  height: 17px;
+  fill: var(--text-light);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.userHandle {
+  composes: dFlex from "@/styles/DFlex.module.css";
+  --align: center !important;
+  gap: var(--s-4) !important;
+  cursor: pointer;
+}
+
+.userHandle span a {
+  text-decoration: none;
+}
+
+.menu:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown {
+  background-color: var(--background-dark);
+  position: absolute;
+  top: 25px;
+  right: 0;
+  width: max-content;
+  padding: var(--s0);
+  border: 1px solid var(--text-light);
+  border-radius: 4px;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 8;
+  transition: all 0.2s ease;
+}
+
+.dropdown a {
+  color: var(--secondary);
+}
+
+.dropdown > * {
+  margin-block-start: var(--s-2);
 }
