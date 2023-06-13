@@ -1,23 +1,18 @@
-import Center from "@/components/Center/Center";
-import LoaderComponent from "@/components/Loader/LoaderComponent";
+"use client";
 import useAuth from "@/hooks/useAuth";
 import { ChildrenPropsType } from "@/types/ChildrenPropsType";
 import React, { useEffect } from "react";
 
 const AdminProtectedPage = ({ children }: ChildrenPropsType) => {
-  const [, , isAdmin, admin] = useAuth();
+  const [, isAdmin, user] = useAuth();
 
   useEffect(() => {
     isAdmin();
     return () => isAdmin();
   }, []);
 
-  if (!admin) {
-    return (
-      <Center>
-        <LoaderComponent></LoaderComponent>
-      </Center>
-    );
+  if (!user) {
+    return null;
   }
 
   return <>{children}</>;

@@ -1,0 +1,15 @@
+.sidebarWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1);
+}
+
+.sidebarWrapper > :first-child {
+  flex-grow: 1;
+}
+
+.sidebarWrapper > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: 50%;
+}

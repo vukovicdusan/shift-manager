@@ -1,0 +1,3 @@
+.sidebarWrapper {
+  composes: switcher from "../../styles/SidebarWrapper.css";
+}
