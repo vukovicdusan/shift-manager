@@ -1,11 +1,12 @@
+import Center from "@/components/Center/Center";
+import LoaderComponent from "@/components/Loader/LoaderComponent";
 import React from "react";
-import styles from "../styles/Loader.module.css";
 
 const Loader = () => {
   return (
-    <div className={styles.center}>
-      <span className={styles.loader}></span>
-    </div>
+    <Center>
+      <LoaderComponent></LoaderComponent>
+    </Center>
   );
 };
 

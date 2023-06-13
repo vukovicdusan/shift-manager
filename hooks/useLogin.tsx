@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { auth } from "@/public/firebase/firebase";
-import {
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 const useLogin = () => {
@@ -38,21 +34,7 @@ const useLogin = () => {
       .catch((error) => {});
   };
 
-  const isAuthorized = () => {
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        router.push("/login");
-      }
-    });
-  };
-
-  return [
-    inputHandler,
-    input,
-    loginHandler,
-    logoutHandler,
-    isAuthorized,
-  ] as const;
+  return [inputHandler, input, loginHandler, logoutHandler] as const;
 };
 
 export default useLogin;

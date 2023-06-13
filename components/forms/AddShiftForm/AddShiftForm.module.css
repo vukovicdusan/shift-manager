@@ -33,9 +33,9 @@
   composes: wrap from "@/styles/Wrap.module.css";
 }
 
-.center {
+/* .center {
   composes: center from "@/styles/Center.module.css";
-}
+} */
 
 .buttonsFlex {
   width: 100%;

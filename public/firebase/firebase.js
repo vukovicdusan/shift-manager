@@ -4,8 +4,8 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  // apiKey: process.env.FIREBASE_API,
-  apiKey: "AIzaSyDQZajD_Qe3UTX1v03JulSbH9SSNAiA-vI",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API,
+  // apiKey: "AIzaSyDQZajD_Qe3UTX1v03JulSbH9SSNAiA-vI",
   authDomain: "shift-manager-1e9d2.firebaseapp.com",
   projectId: "shift-manager-1e9d2",
   storageBucket: "shift-manager-1e9d2.appspot.com",

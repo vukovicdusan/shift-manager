@@ -2,6 +2,7 @@
 import React from "react";
 import styles from "./LoginForm.module.css";
 import useLogin from "@/hooks/useLogin";
+import Center from "@/components/Center/Center";
 
 const LoginForm = () => {
   const [inputHandler, , loginHandler] = useLogin();
@@ -9,9 +10,9 @@ const LoginForm = () => {
   return (
     <>
       <form onSubmit={loginHandler} className={styles.stack}>
-        <div className={styles.center}>
+        <Center>
           <h3>Login</h3>
-        </div>
+        </Center>
         <div className={styles.stack}>
           <div className={styles.inputWrapperColumn}>
             <label htmlFor="email">Email</label>

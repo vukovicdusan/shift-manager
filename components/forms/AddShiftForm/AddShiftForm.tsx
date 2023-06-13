@@ -11,6 +11,7 @@ import { editShiftInFirebase } from "@/helpers/shiftHandlers/editShiftInFirebase
 import { deleteShiftFromFirebase } from "@/helpers/shiftHandlers/deleteShiftFromFirebase";
 import { useCloseModal } from "@/hooks/useCloseModal";
 import { formatMyDate } from "@/helpers/formatMyDate";
+import Center from "@/components/Center/Center";
 
 const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
   const {
@@ -60,12 +61,12 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
       onSubmit={formType === "add" ? addShiftHandler : editShiftHandler}
       className={styles.form}
     >
-      <div className={styles.center}>
+      <Center>
         <h3>
           {isAddForm ? "Assign Workers" : "Edit shift for "}
           {isAddForm ? "" : <span className={styles.title}>{title}</span>}
         </h3>
-      </div>
+      </Center>
       <div className={styles.wrap}>
         <div className={styles.inputWrapperColumn}>
           <label htmlFor="start">Start</label>

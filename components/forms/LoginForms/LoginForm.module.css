@@ -3,9 +3,9 @@
   --stack-align: center;
 }
 
-.center {
+/* .center {
   composes: center from "@/styles/Center.module.css";
-}
+} */
 
 .stack {
   composes: stack from "@/styles/Stack.module.css";

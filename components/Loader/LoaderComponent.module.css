@@ -19,7 +19,3 @@
     transform: rotate(360deg);
   }
 }
-
-.center {
-  composes: center from "@/styles/Center.module.css";
-}
