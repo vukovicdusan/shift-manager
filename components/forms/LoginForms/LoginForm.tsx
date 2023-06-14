@@ -5,7 +5,7 @@ import useLogin from "@/hooks/useLogin";
 import Center from "@/components/Center/Center";
 
 const LoginForm = () => {
-  const [inputHandler, , loginHandler] = useLogin();
+  const [inputHandler, , loginHandler, , error] = useLogin();
 
   return (
     <>
@@ -40,6 +40,13 @@ const LoginForm = () => {
           </div>
         </div>
         <button type="submit">Login</button>
+        {error ? (
+          <span className={styles.error}>
+            Wrong email or password. Try again or contact admin.
+          </span>
+        ) : (
+          ""
+        )}
       </form>
     </>
   );

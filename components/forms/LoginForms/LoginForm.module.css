@@ -19,3 +19,7 @@
   composes: inputWrapperColumn from "@/styles/InputWrapper.module.css";
   align-items: flex-start;
 }
+
+.error {
+  color: var(--error-color);
+}
