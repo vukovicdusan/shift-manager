@@ -11,7 +11,7 @@ const AdminProtectedPage = ({ children }: ChildrenPropsType) => {
     return () => isAdmin();
   }, []);
 
-  if (!user) {
+  if (!user.uid) {
     return null;
   }
 

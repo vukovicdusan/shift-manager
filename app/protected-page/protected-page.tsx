@@ -11,7 +11,7 @@ const ProtectedPage = (props: ChildrenPropsType) => {
     return () => isAuthorized();
   }, []);
 
-  if (!user) {
+  if (!user.uid) {
     return null;
   }
 
