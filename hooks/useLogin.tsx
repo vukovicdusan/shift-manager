@@ -16,7 +16,7 @@ const useLogin = () => {
 
   const loginHandler = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("login handler called");
+
     signInWithEmailAndPassword(auth, input.email, input.password)
       .then((userCredential) => {
         const user = userCredential.user;

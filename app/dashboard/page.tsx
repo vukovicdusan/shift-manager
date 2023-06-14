@@ -1,18 +1,18 @@
 import React from "react";
 import AdminProtectedPage from "../admin-protected-page/admin-protected-page";
 import { getWorkers } from "@/helpers/shiftHandlers/getData";
-import { WorkersCollectionType } from "@/types/WorkersCollectionType";
 import styles from "./DashboardPage.module.css";
+import AddWorkerForm from "@/components/forms/AddWorkerForm/AddWorkerForm";
 
 const Dashboard = async () => {
-  const workers: WorkersCollectionType[] = await getWorkers();
-
-  workers.map((worker) => console.log(worker.name));
+  const workers = await getWorkers();
   return (
     <AdminProtectedPage>
       <div className={styles.sidebarWrapper}>
         <div>Sidebar</div>
-        <div>Content</div>
+        <div>
+          <AddWorkerForm></AddWorkerForm>
+        </div>
         {/* {workers.map((worker: WorkersCollectionType, index) => (
           <div key={index}>{worker}</div>
         ))} */}
