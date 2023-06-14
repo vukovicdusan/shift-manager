@@ -7,9 +7,15 @@ import useWorker from "@/hooks/useWorker";
 
 const AddWorkerForm = () => {
   const [inputHandler, createWorkerInFirebase, passwordError] = useWorker();
+
   return (
     <>
-      <form onSubmit={createWorkerInFirebase} className={styles.form}>
+      <form
+        onSubmit={(e: React.MouseEvent<HTMLFormElement>) =>
+          createWorkerInFirebase(e)
+        }
+        className={styles.form}
+      >
         <Center>
           <h3>Add Worker</h3>
         </Center>

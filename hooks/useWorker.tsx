@@ -1,4 +1,5 @@
 import { passwordRepeatChecker } from "@/helpers/workerHandlers/passwordRepeatChecker";
+import { auth } from "@/public/firebase/firebase";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
@@ -23,8 +24,8 @@ const useWorker = () => {
     }));
   };
 
-  const createWorkerInFirebase = () => {
-    const auth = getAuth();
+  const createWorkerInFirebase = (e: React.MouseEvent<HTMLFormElement>) => {
+    e.preventDefault();
     createUserWithEmailAndPassword(auth, input.email, input.password)
       .then((userCredential) => {
         // Signed in
