@@ -7,7 +7,6 @@ import useWorker from "@/hooks/useWorker";
 
 const AddWorkerForm = () => {
   const [inputHandler, createWorkerInFirebase, passwordError] = useWorker();
-
   return (
     <>
       <form
@@ -20,6 +19,18 @@ const AddWorkerForm = () => {
           <h3>Add Worker</h3>
         </Center>
         <div className={styles.stack}>
+          <div className={styles.inputWrapperColumn}>
+            <label htmlFor="username">Name</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              autoCapitalize="none"
+              autoCorrect="off"
+              required
+              onChange={inputHandler}
+            />
+          </div>
           <div className={styles.inputWrapperColumn}>
             <label htmlFor="email">Email</label>
             <input
@@ -56,7 +67,7 @@ const AddWorkerForm = () => {
             />
           </div>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );

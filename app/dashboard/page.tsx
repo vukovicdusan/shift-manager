@@ -7,17 +7,18 @@ import AddWorkerForm from "@/components/forms/AddWorkerForm/AddWorkerForm";
 const Dashboard = async () => {
   const workers = await getWorkers();
   return (
-    <AdminProtectedPage>
-      <div className={styles.sidebarWrapper}>
-        <div>Sidebar</div>
-        <div>
+    <div className={styles.sidebarWrapper}>
+      <div>Sidebar</div>
+      <>
+        <AdminProtectedPage>
           <AddWorkerForm></AddWorkerForm>
-        </div>
-        {/* {workers.map((worker: WorkersCollectionType, index) => (
+        </AdminProtectedPage>
+      </>
+      <></>
+      {/* {workers.map((worker: WorkersCollectionType, index) => (
           <div key={index}>{worker}</div>
         ))} */}
-      </div>
-    </AdminProtectedPage>
+    </div>
   );
 };
 

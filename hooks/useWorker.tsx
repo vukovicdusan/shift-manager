@@ -1,10 +1,12 @@
 import { passwordRepeatChecker } from "@/helpers/workerHandlers/passwordRepeatChecker";
-import { auth } from "@/public/firebase/firebase";
+import { auth, db } from "@/public/firebase/firebase";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
 const useWorker = () => {
   const [input, setInput] = useState({
+    username: "",
     email: "",
     password: "",
     repeatPassword: "",
@@ -24,12 +26,19 @@ const useWorker = () => {
     }));
   };
 
-  const createWorkerInFirebase = (e: React.MouseEvent<HTMLFormElement>) => {
+  const createWorkerInFirebase = async (
+    e: React.MouseEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
+
+    await addDoc(collection(db, "workers"), {
+      name: input.username,
+    });
+
     createUserWithEmailAndPassword(auth, input.email, input.password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
+        // const user = userCredential.user;
         // ...
       })
       .catch((error) => {
