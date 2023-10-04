@@ -20,7 +20,7 @@ import { openModal } from "@/store/slices/modalSlice";
 const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
   const dispatch = useDispatch();
 
-  //! MOVE CALENDAR HANDLERS TO THE CUSTOM HOOK
+  //! MOVE CALENDAR HANDLERS TO THE CUSTOM HOOK..or don't
   const selectDatesHandler = (selectInfo: DateSelectArg) => {
     const selectedStartDate = selectInfo.start;
     const selectedEndDate = selectInfo.end;
@@ -99,6 +99,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
       eventDisplay="block"
       eventContent={renderEventContent}
       allDaySlot={false}
+      selectLongPressDelay={200}
     />
   );
 };
