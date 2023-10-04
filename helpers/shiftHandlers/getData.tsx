@@ -2,6 +2,7 @@ import { db } from "@/public/firebase/firebase";
 import { ShiftType } from "@/types/ShiftType";
 import { WorkersCollectionType } from "@/types/WorkersCollectionType";
 import { collection, getDocs } from "firebase/firestore";
+export const revalidate = 0;
 
 export const getShifts = async () => {
   let shiftsArr: ShiftType[] = [];
