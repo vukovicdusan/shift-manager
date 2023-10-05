@@ -100,6 +100,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
       eventContent={renderEventContent}
       allDaySlot={false}
       selectLongPressDelay={200}
+      height={"auto"}
     />
   );
 };

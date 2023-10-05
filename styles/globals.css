@@ -297,3 +297,23 @@ button:hover {
   gap: 0.3rem;
   align-items: center;
 }
+
+/* fullCalendar */
+.fc-col-header-cell-cushion {
+  color: var(--text-dark);
+}
+
+th .fc-scrollgrid-sync-inner {
+  background-color: var(--background-light);
+}
+
+@media (max-width: 670px) {
+  .fc-button {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .fc-toolbar-chunk {
+    margin-right: 0.2rem;
+    font-size: var(--s-1);
+  }
+}
