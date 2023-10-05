@@ -25,7 +25,7 @@ const AddWorkerForm = () => {
               type="text"
               id="username"
               name="username"
-              autoCapitalize="none"
+              autoCapitalize="off"
               autoCorrect="off"
               required
               onChange={inputHandler}
@@ -37,7 +37,7 @@ const AddWorkerForm = () => {
               type="text"
               id="email"
               name="email"
-              autoCapitalize="none"
+              autoCapitalize="off"
               autoCorrect="off"
               required
               pattern="[^@]+@[^\.]+\..+"
@@ -67,7 +67,7 @@ const AddWorkerForm = () => {
             />
           </div>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Add Worker</button>
       </form>
     </>
   );

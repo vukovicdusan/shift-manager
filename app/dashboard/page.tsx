@@ -3,6 +3,7 @@ import AdminProtectedPage from "../admin-protected-page/admin-protected-page";
 import { getWorkers } from "@/helpers/shiftHandlers/getData";
 import styles from "./DashboardPage.module.css";
 import AddWorkerForm from "@/components/forms/AddWorkerForm/AddWorkerForm";
+import { WorkersCollectionType } from "@/types/WorkersCollectionType";
 
 const Dashboard = async () => {
   const workers = await getWorkers();
@@ -14,10 +15,11 @@ const Dashboard = async () => {
           <AddWorkerForm></AddWorkerForm>
         </AdminProtectedPage>
       </>
-      <></>
-      {/* {workers.map((worker: WorkersCollectionType, index) => (
-          <div key={index}>{worker}</div>
-        ))} */}
+      {/* <>
+        {workers.map((worker: WorkersCollectionType, index) => (
+          <div key={index}>{worker.name}</div>
+        ))}
+      </> */}
     </div>
   );
 };
