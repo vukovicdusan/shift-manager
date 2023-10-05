@@ -2,6 +2,7 @@ import CalendarComponent from "@/components/CalendarComponent";
 import Modal from "@/components/Modal/Modal";
 import { getShifts, getWorkers } from "@/helpers/shiftHandlers/getData";
 import ProtectedPage from "./protected-page/protected-page";
+export const revalidate = false;
 
 const Home = async () => {
   const shifts = await getShifts();
