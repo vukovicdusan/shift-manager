@@ -1,7 +1,3 @@
 .sidebarWrapper {
-  composes: sidebarWrapper from "../../styles/SidebarWrapper.module.css";
-}
-
-.sidebarWrapper form {
-  align-items: center;
+  composes: sidebarWrapper from "@/styles/SidebarWrapper.module.css";
 }

@@ -2,11 +2,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import shiftSlice from "./slices/shiftSlice";
 import modalSlice from "./slices/modalSlice";
+import dashboardNavSlice from "./slices/dashboardNavSlice";
 
 export const store = configureStore({
   reducer: {
     shifts: shiftSlice,
     modal: modalSlice,
+    dashboardNav: dashboardNavSlice,
   },
 });
 

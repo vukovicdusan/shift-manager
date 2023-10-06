@@ -80,13 +80,15 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-a {
+a,
+.fake-link {
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
 }
 
-a::after {
+a::after,
+.fake-link::after {
   content: "";
   position: absolute;
   width: 0%;
@@ -98,7 +100,12 @@ a::after {
   transition: width 0.2s ease-in-out;
 }
 
+.fake-link {
+  cursor: pointer;
+}
+
 a:hover::after,
+.fake-link:hover::after,
 .navlink-active::after {
   width: 100%;
 }

@@ -1,0 +1,8 @@
+.sidebarNav {
+  padding: var(--s2);
+  border-inline-end: 1px solid var(--background-light);
+}
+
+.stack {
+  composes: stack from "@/styles/Stack.module.css";
+}
