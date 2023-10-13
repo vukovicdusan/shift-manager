@@ -7,23 +7,21 @@ import { WorkersCollectionType } from "@/types/WorkersCollectionType";
 
 import DashboardNav from "@/components/DashboardNav/DashboardNav";
 import { useAppSelector } from "@/store/hooks";
+import CurrentWorkersList from "@/components/CurrentWorkersList/CurrentWorkersList";
 
 const Dashboard = async () => {
   const workers = await getWorkers();
   // const { dashboardNavHandler } = useAppSelector((state) => state.dashboardNav);
   // console.log(dashboardNavHandler);
+
   return (
     <AdminProtectedPage>
       <div className={styles.sidebarWrapper}>
         <DashboardNav></DashboardNav>
-        <>
+        <div className={styles.switcher}>
+          <CurrentWorkersList workers={workers}></CurrentWorkersList>
           <AddWorkerForm></AddWorkerForm>
-        </>
-        {/* <>
-        {workers.map((worker: WorkersCollectionType, index) => (
-          <div key={index}>{worker.name}</div>
-          ))}
-        </> */}
+        </div>
       </div>
     </AdminProtectedPage>
   );

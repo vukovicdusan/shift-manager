@@ -1,0 +1,4 @@
+.container {
+  composes: stack from "@/styles/Stack.module.css";
+  padding: var(--s2);
+}

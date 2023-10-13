@@ -1,0 +1,16 @@
+.switcher {
+  --switcher-children: 4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1);
+}
+
+.switcher > * {
+  flex-grow: 1;
+  flex-basis: calc((30rem - 100%) * 999);
+}
+
+.switcher > :nth-last-child(n + var(--switcher-children)),
+.switcher > :nth-last-child(n + var(--switcher-children)) ~ * {
+  flex-basis: 100%;
+}
