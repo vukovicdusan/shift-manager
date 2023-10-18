@@ -3,14 +3,12 @@ import styles from "./CurrentWorkerslist.module.css";
 import React, { useState } from "react";
 import { WorkersFirebaseType } from "@/types/WorkersFirebaseType";
 import useWorker from "@/hooks/useWorker";
-import { useRouter } from "next/navigation";
 
 type WorkersProps = {
   workers: WorkersFirebaseType[];
 };
 
 const CurrentWorkersList = (props: WorkersProps) => {
-  const router = useRouter();
   const [, , , removeWorkerFromFirebase] = useWorker();
   const [openDialog, setOpenDialog] = useState(false);
   const [workerInfo, setWorkerInfo] = useState<WorkersFirebaseType>({
@@ -23,7 +21,6 @@ const CurrentWorkersList = (props: WorkersProps) => {
   const removeWorkerHandler = (workerId: string, workerUid: string) => {
     removeWorkerFromFirebase(workerId, workerUid);
     setOpenDialog(false);
-    router.refresh();
   };
 
   const openDialogHandler = (worker: WorkersFirebaseType) => {

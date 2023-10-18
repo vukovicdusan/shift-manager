@@ -4,8 +4,10 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { deleteUser } from "@/actions/deleteUser";
+import { useRouter } from "next/navigation";
 
 const useWorker = () => {
+  const router = useRouter();
   const [input, setInput] = useState({
     username: "",
     email: "",
@@ -53,6 +55,7 @@ const useWorker = () => {
     // e.preventDefault();
     await deleteDoc(doc(db, "workers", workerId));
     await deleteUser(workerUid);
+    router.refresh();
   };
 
   return [
