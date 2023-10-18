@@ -5,10 +5,9 @@ import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API,
-  // apiKey: "AIzaSyDQZajD_Qe3UTX1v03JulSbH9SSNAiA-vI",
   authDomain: "shift-manager-1e9d2.firebaseapp.com",
   projectId: "shift-manager-1e9d2",
-  storageBucket: "shift-manager-1e9d2.appspot.com",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: "85193443735",
   appId: "1:85193443735:web:9d9cdfffa739a49de21cd2",
   measurementId: "G-9WJB2N6T4V",

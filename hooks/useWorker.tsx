@@ -1,8 +1,9 @@
 import { passwordRepeatChecker } from "@/helpers/workerHandlers/passwordRepeatChecker";
-import { auth, db } from "@/public/firebase/firebase";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { auth, db } from "@/firebase/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { deleteUser } from "@/actions/deleteUser";
 
 const useWorker = () => {
   const [input, setInput] = useState({
@@ -31,24 +32,35 @@ const useWorker = () => {
   ) => {
     e.preventDefault();
 
-    await addDoc(collection(db, "workers"), {
-      name: input.username,
-    });
-
-    createUserWithEmailAndPassword(auth, input.email, input.password)
+    await createUserWithEmailAndPassword(auth, input.email, input.password)
       .then((userCredential) => {
-        // Signed in
-        // const user = userCredential.user;
-        // ...
+        addDoc(collection(db, "workers"), {
+          name: input.username,
+          email: input.email,
+          uid: userCredential.user.uid,
+        });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
       });
   };
 
-  return [inputHandler, createWorkerInFirebase, passwordError] as const;
+  const removeWorkerFromFirebase = async (
+    workerId: string,
+    workerUid: string
+  ) => {
+    // e.preventDefault();
+    await deleteDoc(doc(db, "workers", workerId));
+    await deleteUser(workerUid);
+  };
+
+  return [
+    inputHandler,
+    createWorkerInFirebase,
+    passwordError,
+    removeWorkerFromFirebase,
+  ] as const;
 };
 
 export default useWorker;

@@ -1,4 +1,4 @@
-import { auth } from "@/public/firebase/firebase";
+import { auth } from "@/firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "@/public/firebase/firebase";
+import { db } from "@/firebase/firebase";
 import { adjustDateForNightShift } from "../adjustDateForNightShift";
 
 export const createShiftInFirebase = async (

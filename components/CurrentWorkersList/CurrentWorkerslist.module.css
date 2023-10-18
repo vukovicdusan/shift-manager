@@ -2,3 +2,61 @@
   composes: stack from "@/styles/Stack.module.css";
   padding: var(--s2);
 }
+
+.btn {
+  border: none;
+  background-color: transparent;
+}
+
+.btn:hover {
+  /* border: none; */
+  background-color: transparent;
+}
+
+.worker {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+  fill: var(--error-color);
+  transition: fill 0.2s ease;
+}
+
+.closeIcon:hover {
+  fill: var(--primary);
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--s1);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid var(--background-light);
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: var(--background-dark);
+}
+
+.dialog span {
+  color: var(--primary);
+}
+
+.dialog button:first-child {
+  background-color: var(--error-color);
+}
+
+.dialog button:last-child {
+  margin-left: 0.5rem;
+  background-color: var(--secondary);
+}

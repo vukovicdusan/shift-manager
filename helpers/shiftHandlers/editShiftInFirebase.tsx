@@ -1,4 +1,4 @@
-import { db } from "@/public/firebase/firebase";
+import { db } from "@/firebase/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 
 export const editShiftInFirebase = async (
