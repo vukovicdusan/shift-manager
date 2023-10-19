@@ -37,9 +37,8 @@ const CurrentWorkersList = (props: WorkersProps) => {
 
   return (
     <>
-      {value === "Current Workers" ? (
+      {value === "Workers" ? (
         <div className={styles.container}>
-          <h3>Current Workers</h3>
           {props.workers.map((worker: WorkersFirebaseType, index: number) => (
             <div className={styles.worker} key={index}>
               {worker.name}

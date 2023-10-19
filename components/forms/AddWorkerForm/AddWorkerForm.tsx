@@ -18,9 +18,6 @@ const AddWorkerForm = () => {
           }
           className={styles.form}
         >
-          <Center>
-            <h3>Add Worker</h3>
-          </Center>
           <div className={styles.stack}>
             <div className={styles.inputWrapperColumn}>
               <label htmlFor="username">Name</label>

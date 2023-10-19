@@ -17,19 +17,8 @@ const DashboardNav = () => {
           </button>
         </li>
         <li>
-          <button
-            className="fake-link"
-            onClick={() => valueHandler("Current Workers")}
-          >
-            Current Workers
-          </button>
-        </li>
-        <li>
-          <button
-            className="fake-link"
-            onClick={() => valueHandler("Do something 2")}
-          >
-            Do Something 2
+          <button className="fake-link" onClick={() => valueHandler("Workers")}>
+            Workers
           </button>
         </li>
       </ul>

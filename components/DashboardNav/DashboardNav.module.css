@@ -6,3 +6,19 @@
 .stack {
   composes: stack from "@/styles/Stack.module.css";
 }
+
+@media (max-width: 500px) {
+  .stack {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stack > * + * {
+    margin: 0;
+  }
+
+  .sidebarNav {
+    border-inline-end: none;
+  }
+}
