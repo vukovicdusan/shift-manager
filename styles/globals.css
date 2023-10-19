@@ -101,7 +101,20 @@ a::after,
 }
 
 .fake-link {
+  display: inline-block;
+  position: relative;
+  border: none;
+  color: var(--text-light);
+  background-color: transparent !important;
   cursor: pointer;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none !important;
+  text-transform: uppercase;
+}
+
+.fake-link:hover {
+  background-color: transparent;
 }
 
 a:hover::after,

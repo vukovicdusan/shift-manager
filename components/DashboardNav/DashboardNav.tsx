@@ -19,9 +19,9 @@ const DashboardNav = () => {
         <li>
           <button
             className="fake-link"
-            onClick={() => valueHandler("Do something 1")}
+            onClick={() => valueHandler("Current Workers")}
           >
-            Do Something 1
+            Current Workers
           </button>
         </li>
         <li>

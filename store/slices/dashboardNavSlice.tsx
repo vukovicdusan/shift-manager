@@ -1,14 +1,22 @@
 "use client";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState: string = "Add Worker";
+interface DashboardNavState {
+  value: string;
+}
+
+const initialState = { value: "Add Worker" } as DashboardNavState;
+
+// const initialState: DashboardNavStateType = {
+//   value: "Add Worker",
+// };
 
 export const dashboardNavSlice = createSlice({
   name: "dashboardNav",
   initialState,
   reducers: {
     dashboardNavHandler: (state, action: PayloadAction<string>) => {
-      return action.payload;
+      state.value = action.payload;
     },
   },
 });
