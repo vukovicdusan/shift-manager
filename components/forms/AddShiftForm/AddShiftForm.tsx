@@ -32,10 +32,12 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
 
   const addShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await createShiftInFirebase(start, end, assignedWorkers, shiftType);
+    await createShiftInFirebase(start, start, assignedWorkers, shiftType);
     closeModal();
     reload();
   };
+
+  console.log(end);
 
   const editShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -87,7 +89,10 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
             type="text"
             id="end"
             name="end"
-            defaultValue={formatMyDate(end)}
+            defaultValue={formatMyDate(start)}
+            value={
+              shiftType === "day" ? formatMyDate(start) : formatMyDate(end)
+            }
             readOnly={isAddForm ? true : false}
             onChange={editDateHandler}
             pattern="\d{2}/\d{2}/\d{4}"

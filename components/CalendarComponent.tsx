@@ -24,7 +24,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
   const selectDatesHandler = (selectInfo: DateSelectArg) => {
     const selectedStartDate = selectInfo.start;
     const selectedEndDate = selectInfo.end;
-
+    console.log(selectInfo.startStr);
     const allEvents = selectInfo.view.calendar.getEvents();
 
     const intersectingEvents = allEvents.filter((event) => {
@@ -101,6 +101,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
       allDaySlot={false}
       selectLongPressDelay={200}
       height={"auto"}
+      defaultAllDay={false}
     />
   );
 };
