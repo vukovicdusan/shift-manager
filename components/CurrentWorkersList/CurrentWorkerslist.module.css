@@ -1,63 +1,88 @@
 .container {
-  composes: stack from "@/styles/Stack.module.css";
-  padding: var(--s2);
-  align-items: center !important;
+	padding: var(--s2);
+	align-items: center !important;
+}
+
+.table {
+	border: 1px var(--background-light) solid;
+	width: 100%;
+}
+
+.table thead th,
+.table tbody td {
+	padding: var(--s0);
+}
+
+.table thead th:first-child {
+	text-align: start;
+}
+
+.table thead th:last-child {
+	text-align: end;
+}
+
+.table tbody tr:nth-child(odd) {
+	background-color: var(--background-light);
+}
+
+.action {
+	text-align: end;
 }
 
 .btn {
-  border: none;
-  background-color: transparent;
+	border: none;
+	background-color: transparent;
+	padding: 0;
 }
 
 .btn:hover {
-  /* border: none; */
-  background-color: transparent;
+	background-color: transparent;
 }
 
 .worker {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 }
 
 .closeIcon {
-  width: 20px;
-  height: 20px;
-  fill: var(--error-color);
-  transition: fill 0.2s ease;
+	width: 20px;
+	height: 20px;
+	fill: var(--error-color);
+	transition: fill 0.2s ease;
 }
 
 .closeIcon:hover {
-  fill: var(--primary);
+	fill: var(--primary);
 }
 
 .dialog {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--s1);
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: fit-content;
-  height: fit-content;
-  border: 1px solid var(--background-light);
-  border-radius: 5px;
-  padding: 1rem;
-  background-color: var(--background-dark);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: var(--s1);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: fit-content;
+	height: fit-content;
+	border: 1px solid var(--background-light);
+	border-radius: 5px;
+	padding: 1rem;
+	background-color: var(--background-dark);
 }
 
 .dialog span {
-  color: var(--primary);
+	color: var(--primary);
 }
 
 .dialog button:first-child {
-  background-color: var(--error-color);
+	background-color: var(--error-color);
 }
 
 .dialog button:last-child {
-  margin-left: 0.5rem;
-  background-color: var(--secondary);
+	margin-left: 0.5rem;
+	background-color: var(--secondary);
 }
