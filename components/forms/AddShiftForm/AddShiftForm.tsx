@@ -97,8 +97,8 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
 						type="text"
 						id="end"
 						name="end"
-						defaultValue={formatMyDate(start)}
-						value={
+						// defaultValue={formatMyDate(start)}
+						defaultValue={
 							shiftType === "day"
 								? formatMyDate(start)
 								: formatMyDate(end)
