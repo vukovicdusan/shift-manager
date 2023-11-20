@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import { WorkersFirebaseType } from "@/types/WorkersFirebaseType";
 import useWorker from "@/hooks/useWorker";
 import { useAppSelector } from "@/store/hooks";
+import { ShiftType } from "@/types/ShiftType";
 
 type WorkersProps = {
 	workers: WorkersFirebaseType[];
+	shifts: ShiftType[];
 };
 
 const CurrentWorkersList = (props: WorkersProps) => {
@@ -35,6 +37,10 @@ const CurrentWorkersList = (props: WorkersProps) => {
 		});
 	};
 
+	const shiftCounter = (name: String) => {
+		return props.shifts.filter((el) => el.title === name).length;
+	};
+
 	return (
 		<>
 			{value === "Workers" ? (
@@ -43,6 +49,7 @@ const CurrentWorkersList = (props: WorkersProps) => {
 						<thead>
 							<tr>
 								<th>Worker</th>
+								<th>Shifts</th>
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -53,10 +60,10 @@ const CurrentWorkersList = (props: WorkersProps) => {
 									index: number
 								) => (
 									<tr key={index}>
-										{/* <div className={styles.worker}> */}
 										<td className={styles.worker}>
 											{worker.name}
 										</td>
+										<td>{shiftCounter(worker.name)}</td>
 										<td className={styles.action}>
 											<button
 												title="Remove worker"
@@ -76,7 +83,6 @@ const CurrentWorkersList = (props: WorkersProps) => {
 												</svg>
 											</button>
 										</td>
-										{/* </div> */}
 									</tr>
 								)
 							)}
