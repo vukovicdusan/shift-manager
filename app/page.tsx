@@ -1,5 +1,5 @@
 import CalendarComponent from "@/components/CalendarComponent";
-import Modal from "@/components/Modal/Modal";
+import Modal from "@/components/Modal/AddEditShiftsModal";
 import { getShifts, getWorkers } from "@/helpers/shiftHandlers/getData";
 import ProtectedPage from "./protected-page/protected-page";
 

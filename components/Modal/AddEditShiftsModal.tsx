@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import styles from "./Modal.module.css";
+import styles from "./AddEditShiftsModal.module.css";
 import { useAppSelector } from "@/store/hooks";
 import { WorkersCollectionType } from "@/types/WorkersCollectionType";
 import AddShiftForm from "../forms/AddShiftForm/AddShiftForm";
