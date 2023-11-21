@@ -1,15 +1,13 @@
 "use client";
 import { configureStore } from "@reduxjs/toolkit";
-import shiftSlice from "./slices/shiftSlice";
 import modalSlice from "./slices/modalSlice";
 import dashboardNavSlice from "./slices/dashboardNavSlice";
 
 export const store = configureStore({
-  reducer: {
-    shifts: shiftSlice,
-    modal: modalSlice,
-    dashboardNav: dashboardNavSlice,
-  },
+	reducer: {
+		modal: modalSlice,
+		dashboardNav: dashboardNavSlice,
+	},
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
