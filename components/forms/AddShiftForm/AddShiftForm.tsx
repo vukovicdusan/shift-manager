@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 import styles from "./AddShiftForm.module.css";
 import { capitalize } from "@/helpers/capitalize";
 import { useAppSelector } from "@/store/hooks";
@@ -12,7 +12,6 @@ import { deleteShiftFromFirebase } from "@/helpers/shiftHandlers/deleteShiftFrom
 import { useCloseModal } from "@/hooks/useCloseModal";
 import { formatMyDate } from "@/helpers/formatMyDate";
 import Center from "@/components/Center/Center";
-import { getMonth } from "@/helpers/getMonth";
 
 const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
 	const {

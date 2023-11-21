@@ -1,58 +1,57 @@
 .form {
-  composes: stack from "@/styles/Stack.module.css";
-  padding: var(--s2);
-  background-color: var(--background-dark);
+	composes: stack from "@/styles/Stack.module.css";
+	padding: var(--s2);
+	background-color: var(--background-dark);
 }
 
 .form > * + * {
-  --stack-space: var(--s3);
+	--stack-space: var(--s3);
 }
 
 .inputWrapper {
-  composes: inputWrapper from "@/styles/InputWrapper.module.css";
+	composes: inputWrapper from "@/styles/InputWrapper.module.css";
 }
 
 .inputWrapperColumn {
-  composes: inputWrapperColumn from "@/styles/InputWrapper.module.css";
-  justify-content: flex-start;
-  align-items: flex-start;
+	composes: inputWrapperColumn from "@/styles/InputWrapper.module.css";
+	justify-content: flex-start;
+	align-items: flex-start;
 }
 
 .inputWrapper select {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .flex {
-  composes: dFlex from "@/styles/DFlex.module.css";
-  --gap: var(--s1);
-  --justify: center;
+	composes: dFlex from "@/styles/DFlex.module.css";
+	--gap: var(--s1);
+	--justify: center;
 }
 
 .wrap {
-  --gap: var(--s0);
-  composes: wrap from "@/styles/Wrap.module.css";
+	--gap: var(--s0);
+	composes: wrap from "@/styles/Wrap.module.css";
 }
 
-/* STYLED CHECKBOX */
 .styledCheckbox {
-  composes: styledCheckbox from "../../../styles/StyledCheckbox.styles.css";
+	composes: styledCheckbox from "../../../styles/StyledCheckbox.styles.css";
 }
 
 .buttonsFlex {
-  width: 100%;
-  --align: center;
+	width: 100%;
+	--align: center;
 }
 
 .deleteButton {
-  background-color: var(--error-color);
+	background-color: var(--error-color);
 }
 
 .deleteButton:hover {
-  opacity: 0.8;
-  background-color: var(--error-color);
-  border-color: var(--error-color);
+	opacity: 0.8;
+	background-color: var(--error-color);
+	border-color: var(--error-color);
 }
 
 .title {
-  color: var(--secondary);
+	color: var(--secondary);
 }
