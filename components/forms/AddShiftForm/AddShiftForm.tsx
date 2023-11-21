@@ -12,6 +12,7 @@ import { deleteShiftFromFirebase } from "@/helpers/shiftHandlers/deleteShiftFrom
 import { useCloseModal } from "@/hooks/useCloseModal";
 import { formatMyDate } from "@/helpers/formatMyDate";
 import Center from "@/components/Center/Center";
+import { getMonth } from "@/helpers/getMonth";
 
 const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
   const {
@@ -32,7 +33,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
 
   const addShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await createShiftInFirebase(start, end, assignedWorkers, shiftType);
+    await createShiftInFirebase(start, start, assignedWorkers, shiftType);
     closeModal();
     reload();
   };

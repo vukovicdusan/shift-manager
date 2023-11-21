@@ -7,118 +7,137 @@ import { useAppSelector } from "@/store/hooks";
 import { ShiftType } from "@/types/ShiftType";
 
 type WorkersProps = {
-	workers: WorkersFirebaseType[];
-	shifts: ShiftType[];
+  workers: WorkersFirebaseType[];
+  shifts: ShiftType[];
 };
 
 const CurrentWorkersList = (props: WorkersProps) => {
-	const [, , , removeWorkerFromFirebase] = useWorker();
-	const [openDialog, setOpenDialog] = useState(false);
-	const [workerInfo, setWorkerInfo] = useState<WorkersFirebaseType>({
-		id: "",
-		name: "",
-		email: "",
-		uid: "",
-	});
-	const { value } = useAppSelector((state) => state.dashboardNav);
+  const [, , , removeWorkerFromFirebase] = useWorker();
+  const [openDialog, setOpenDialog] = useState(false);
+  const [workerInfo, setWorkerInfo] = useState<WorkersFirebaseType>({
+    id: "",
+    name: "",
+    email: "",
+    uid: "",
+  });
+  const [monthSelect, setMonthSelect] = useState("");
 
-	const removeWorkerHandler = (workerId: string, workerUid: string) => {
-		removeWorkerFromFirebase(workerId, workerUid);
-		setOpenDialog(false);
-	};
+  const { value } = useAppSelector((state) => state.dashboardNav);
+  const monthsArr: string[] = [
+    "All",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
-	const openDialogHandler = (worker: WorkersFirebaseType) => {
-		setOpenDialog(true);
-		setWorkerInfo({
-			id: worker.id,
-			name: worker.name,
-			email: worker.email,
-			uid: worker.uid,
-		});
-	};
+  const removeWorkerHandler = (workerId: string, workerUid: string) => {
+    removeWorkerFromFirebase(workerId, workerUid);
+    setOpenDialog(false);
+  };
 
-	const shiftCounter = (name: String) => {
-		return props.shifts.filter((el) => el.title === name).length;
-	};
+  const openDialogHandler = (worker: WorkersFirebaseType) => {
+    setOpenDialog(true);
+    setWorkerInfo({
+      id: worker.id,
+      name: worker.name,
+      email: worker.email,
+      uid: worker.uid,
+    });
+  };
 
-	return (
-		<>
-			{value === "Workers" ? (
-				<div className={styles.container}>
-					<table className={styles.table}>
-						<thead>
-							<tr>
-								<th>Worker</th>
-								<th>Shifts</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							{props.workers.map(
-								(
-									worker: WorkersFirebaseType,
-									index: number
-								) => (
-									<tr key={index}>
-										<td className={styles.worker}>
-											{worker.name}
-										</td>
-										<td>{shiftCounter(worker.name)}</td>
-										<td className={styles.action}>
-											<button
-												title="Remove worker"
-												className={styles.btn}
-												onClick={() =>
-													openDialogHandler(worker)
-												}
-											>
-												<svg
-													className={styles.closeIcon}
-												>
-													<use
-														xlinkHref={
-															"./svg/sprite.svg#close"
-														}
-													></use>
-												</svg>
-											</button>
-										</td>
-									</tr>
-								)
-							)}
-						</tbody>
-					</table>
-					{openDialog ? (
-						<div className={styles.dialog}>
-							<p>
-								Are you sure you want to delete worker:{" "}
-								<span className="">{workerInfo.name}</span>
-							</p>
-							<div>
-								<button
-									onClick={() =>
-										removeWorkerHandler(
-											workerInfo.id,
-											workerInfo.uid
-										)
-									}
-								>
-									Yes I&apos;m sure
-								</button>
-								<button onClick={() => setOpenDialog(false)}>
-									No
-								</button>
-							</div>
-						</div>
-					) : (
-						""
-					)}
-				</div>
-			) : (
-				""
-			)}
-		</>
-	);
+  const shiftCounter = (name: String) => {
+    return monthSelect === "All"
+      ? props.shifts.filter((el) => el.title === name).length
+      : props.shifts.filter(
+          (el) => el.title === name && el.month === monthSelect.toLowerCase()
+        ).length;
+  };
+
+  return (
+    <>
+      {value === "Workers" ? (
+        <div className={styles.container}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Worker</th>
+                <th className={styles.flex}>
+                  Shifts
+                  <div className={styles.inputWrapper}>
+                    <select
+                      defaultValue={"All"}
+                      onChange={(e) => setMonthSelect(e.target.value)}
+                      name="month"
+                      id="month"
+                    >
+                      {monthsArr.map((month, index) => (
+                        <option key={index} value={month}>
+                          {month}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.workers.map(
+                (worker: WorkersFirebaseType, index: number) => (
+                  <tr key={index}>
+                    <td className={styles.worker}>{worker.name}</td>
+                    <td>{shiftCounter(worker.name)}</td>
+                    <td className={styles.action}>
+                      <button
+                        title="Remove worker"
+                        className={styles.btn}
+                        onClick={() => openDialogHandler(worker)}
+                      >
+                        <svg className={styles.closeIcon}>
+                          <use xlinkHref={"./svg/sprite.svg#close"}></use>
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </table>
+          {openDialog ? (
+            <div className={styles.dialog}>
+              <p>
+                Are you sure you want to delete worker:{" "}
+                <span className="">{workerInfo.name}</span>
+              </p>
+              <div>
+                <button
+                  onClick={() =>
+                    removeWorkerHandler(workerInfo.id, workerInfo.uid)
+                  }
+                >
+                  Yes I&apos;m sure
+                </button>
+                <button onClick={() => setOpenDialog(false)}>No</button>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+      ) : (
+        ""
+      )}
+    </>
+  );
 };
 
 export default CurrentWorkersList;

@@ -6,4 +6,5 @@ export interface ShiftType {
   className: string;
   overtime: { valid: boolean; amount: number };
   allDay?: boolean;
+  month?: string;
 }
