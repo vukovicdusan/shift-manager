@@ -2,7 +2,7 @@
   composes: stack from "@/styles/Stack.module.css";
   padding: var(--s2);
   background-color: var(--background-dark);
-  align-items: center !important;
+  align-items: flex-start !important;
 }
 
 .form > * + *,
@@ -26,4 +26,9 @@
 
 .error {
   border-color: var(--error-color);
+}
+
+.flex {
+  composes: dFlex from "../../../styles/DFlex.module.css";
+  gap: var(--s2);
 }
