@@ -3,8 +3,6 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 import { adjustDateForNightShift } from "../adjustDateForNightShift";
 import { formatMyDate } from "../formatMyDate";
-import { getMonth } from "../getMonth";
-import { getYear } from "../getYear";
 
 export const createShiftInFirebase = async (
 	start: string,
@@ -29,8 +27,6 @@ export const createShiftInFirebase = async (
 						endWorkHours,
 					id: formatMyDate(start, "noslash") + "-" + newId,
 					className: shiftType,
-					month: getMonth(start),
-					year: getYear(start),
 				}
 			);
 		} catch (err) {

@@ -1,6 +1,5 @@
 import { db } from "@/firebase/firebase";
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
-// import { adjustDateForNightShift } from "../adjustDateForNightShift";
 
 export const editShiftInFirebase = async (
 	shiftId: string,

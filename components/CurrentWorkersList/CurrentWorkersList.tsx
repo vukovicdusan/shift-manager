@@ -5,7 +5,8 @@ import { WorkersFirebaseType } from "@/types/WorkersFirebaseType";
 import useWorker from "@/hooks/useWorker";
 import { useAppSelector } from "@/store/hooks";
 import { ShiftType } from "@/types/ShiftType";
-import { current } from "@reduxjs/toolkit";
+import { getMonth } from "@/helpers/getMonth";
+import { getYear } from "@/helpers/getYear";
 
 type WorkersProps = {
 	workers: WorkersFirebaseType[];
@@ -44,10 +45,9 @@ const CurrentWorkersList = (props: WorkersProps) => {
 	];
 
 	const yearsArr: string[] = [];
-
 	props.shifts.map((shift) => {
-		if (shift.year && !yearsArr.includes(shift.year)) {
-			yearsArr.push(shift.year);
+		if (getYear(shift.start) && !yearsArr.includes(getYear(shift.start))) {
+			yearsArr.push(getYear(shift.start));
 		}
 	});
 
@@ -69,13 +69,14 @@ const CurrentWorkersList = (props: WorkersProps) => {
 	const shiftCounter = (name: String) => {
 		return monthSelect === "All"
 			? props.shifts.filter(
-					(el) => el.title === name && el.year === yearSelect
+					(el) =>
+						el.title === name && getYear(el.start) === yearSelect
 			  ).length
 			: props.shifts.filter(
 					(el) =>
 						el.title === name &&
-						el.month === monthSelect.toLowerCase() &&
-						el.year === yearSelect
+						getMonth(el.start) === monthSelect.toLowerCase() &&
+						getYear(el.start) === yearSelect
 			  ).length;
 	};
 
