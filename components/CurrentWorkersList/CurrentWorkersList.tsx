@@ -67,7 +67,7 @@ const CurrentWorkersList = (props: WorkersProps) => {
 	return (
 		<>
 			{value === "Workers" ? (
-				<div className={styles.container}>
+				<>
 					<table className={styles.table}>
 						<thead>
 							<tr>
@@ -159,7 +159,7 @@ const CurrentWorkersList = (props: WorkersProps) => {
 					) : (
 						""
 					)}
-				</div>
+				</>
 			) : (
 				""
 			)}

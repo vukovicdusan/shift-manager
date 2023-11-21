@@ -1,7 +1,3 @@
-.container {
-	padding: var(--s2);
-}
-
 .table {
 	border: 1px var(--background-light) solid;
 	width: 100%;

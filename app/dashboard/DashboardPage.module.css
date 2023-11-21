@@ -1,8 +1,12 @@
 .sidebarWrapper {
-  composes: sidebarWrapper from "@/styles/SidebarWrapper.module.css";
+	composes: sidebarWrapper from "@/styles/SidebarWrapper.module.css";
 }
 
 .switcher {
-  composes: switcher from "@/styles/Switcher.module.css";
-  --switcher-children: 3;
+	composes: switcher from "@/styles/Switcher.module.css";
+	--switcher-children: 3;
+}
+
+.switcher:nth-child(2) {
+	overflow-x: auto;
 }
