@@ -5,7 +5,7 @@ interface DashboardNavState {
   value: string;
 }
 
-const initialState = { value: "Add Worker" } as DashboardNavState;
+const initialState = { value: "Workers" } as DashboardNavState;
 
 // const initialState: DashboardNavStateType = {
 //   value: "Add Worker",
