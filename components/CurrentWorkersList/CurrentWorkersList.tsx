@@ -5,6 +5,7 @@ import { WorkersFirebaseType } from "@/types/WorkersFirebaseType";
 import useWorker from "@/hooks/useWorker";
 import { useAppSelector } from "@/store/hooks";
 import { ShiftType } from "@/types/ShiftType";
+import { current } from "@reduxjs/toolkit";
 
 type WorkersProps = {
 	workers: WorkersFirebaseType[];
@@ -21,8 +22,11 @@ const CurrentWorkersList = (props: WorkersProps) => {
 		uid: "",
 	});
 	const [monthSelect, setMonthSelect] = useState("All");
+	const currentYear = new Date().getFullYear().toString();
+	const [yearSelect, setYearSelect] = useState(currentYear);
 
 	const { value } = useAppSelector((state) => state.dashboardNav);
+
 	const monthsArr: string[] = [
 		"All",
 		"January",
@@ -38,6 +42,14 @@ const CurrentWorkersList = (props: WorkersProps) => {
 		"November",
 		"December",
 	];
+
+	const yearsArr: string[] = [];
+
+	props.shifts.map((shift) => {
+		if (shift.year && !yearsArr.includes(shift.year)) {
+			yearsArr.push(shift.year);
+		}
+	});
 
 	const removeWorkerHandler = (workerId: string, workerUid: string) => {
 		removeWorkerFromFirebase(workerId, workerUid);
@@ -56,11 +68,14 @@ const CurrentWorkersList = (props: WorkersProps) => {
 
 	const shiftCounter = (name: String) => {
 		return monthSelect === "All"
-			? props.shifts.filter((el) => el.title === name).length
+			? props.shifts.filter(
+					(el) => el.title === name && el.year === yearSelect
+			  ).length
 			: props.shifts.filter(
 					(el) =>
 						el.title === name &&
-						el.month === monthSelect.toLowerCase()
+						el.month === monthSelect.toLowerCase() &&
+						el.year === yearSelect
 			  ).length;
 	};
 
@@ -69,6 +84,18 @@ const CurrentWorkersList = (props: WorkersProps) => {
 			{value === "Workers" ? (
 				<>
 					<table className={styles.table}>
+						<caption>
+							<select
+								onChange={(e) => setYearSelect(e.target.value)}
+								defaultValue={currentYear}
+							>
+								{yearsArr.map((year, index) => (
+									<option key={index} value={year}>
+										{year}
+									</option>
+								))}
+							</select>
+						</caption>
 						<thead>
 							<tr>
 								<th>Worker</th>

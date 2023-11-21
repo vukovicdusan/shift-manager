@@ -1,10 +1,11 @@
 export interface ShiftType {
-  id: string;
-  title: string;
-  start: string;
-  end: string;
-  className: string;
-  overtime: { valid: boolean; amount: number };
-  allDay?: boolean;
-  month?: string;
+	id: string;
+	title: string;
+	start: string;
+	end: string;
+	className: string;
+	overtime: { valid: boolean; amount: number };
+	allDay?: boolean;
+	month?: string;
+	year?: string;
 }

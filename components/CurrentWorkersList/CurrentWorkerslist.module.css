@@ -1,3 +1,10 @@
+.table caption {
+	font-size: var(--s1);
+}
+
+.table caption select {
+	border: 0;
+}
 .table {
 	border: 1px var(--background-light) solid;
 	width: 100%;

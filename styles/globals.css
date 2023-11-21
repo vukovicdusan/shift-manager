@@ -336,4 +336,8 @@ th .fc-scrollgrid-sync-inner {
 		margin-right: 0.2rem;
 		font-size: var(--s-1);
 	}
+
+	.shift-icon {
+		display: none;
+	}
 }
