@@ -7,10 +7,6 @@ interface DashboardNavState {
 
 const initialState = { value: "Workers" } as DashboardNavState;
 
-// const initialState: DashboardNavStateType = {
-//   value: "Add Worker",
-// };
-
 export const dashboardNavSlice = createSlice({
   name: "dashboardNav",
   initialState,

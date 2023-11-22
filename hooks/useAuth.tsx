@@ -1,7 +1,9 @@
 import { auth } from "@/firebase/firebase";
+import { userHandler } from "@/store/slices/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 interface userType {
   uid?: string;
@@ -10,23 +12,32 @@ interface userType {
 
 const useAuth = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [user, setUser] = useState<userType>({ uid: "", email: "" });
 
   const isAuthorized = () => {
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      if (!firebaseUser) {
         router.push("/login");
       }
-      setUser({ uid: user?.uid, email: user?.email! });
+      if (firebaseUser) {
+        if (firebaseUser.email) {
+          setUser({ uid: firebaseUser?.uid, email: firebaseUser?.email! });
+          dispatch(userHandler({ isAdmin: false, email: firebaseUser?.email }));
+        }
+      }
     });
   };
 
   const isAdmin = () => {
-    onAuthStateChanged(auth, (user) => {
-      if (user?.uid !== process.env.NEXT_PUBLIC_ADMIN_UID) {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser?.uid !== process.env.NEXT_PUBLIC_ADMIN_UID) {
         router.push("/");
         setUser({ uid: "", email: "" });
-      } else setUser({ uid: user?.uid, email: user?.email! });
+      } else {
+        setUser({ uid: firebaseUser?.uid, email: firebaseUser?.email! });
+        dispatch(userHandler({ isAdmin: true, email: "admin" }));
+      }
     });
   };
 

@@ -1,0 +1,3 @@
+.inputWrapper {
+  composes: inputWrapper from "../../../styles/InputWrapper.module.css";
+}

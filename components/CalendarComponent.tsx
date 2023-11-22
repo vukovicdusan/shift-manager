@@ -14,17 +14,18 @@ import { renderEventContent } from "@/helpers/renderEventContent";
 import { ShiftType } from "@/types/ShiftType";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/store/slices/modalSlice";
+import { useAppSelector } from "@/store/hooks";
 // import { adjustDateForDayShift } from "@/helpers/adjustDateForDayShift";
 // import { hoursRemover } from "@/helpers/hoursRemover";
 
 const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
   const dispatch = useDispatch();
+  const { isAdmin } = useAppSelector((state) => state.user);
 
   //! MOVE CALENDAR HANDLERS TO THE CUSTOM HOOK..or don't
   const selectDatesHandler = (selectInfo: DateSelectArg) => {
     const selectedStartDate = selectInfo.start;
     const selectedEndDate = selectInfo.end;
-    console.log(selectInfo.startStr);
     const allEvents = selectInfo.view.calendar.getEvents();
 
     const intersectingEvents = allEvents.filter((event) => {
@@ -60,7 +61,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
     dispatch(
       openModal({
         isOpen: true,
-        formType: "edit",
+        formType: isAdmin ? "edit" : "overtime",
         data: {
           start: clickInfo.event.startStr,
           end: clickInfo.event.endStr,
