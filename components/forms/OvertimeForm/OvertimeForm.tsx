@@ -2,6 +2,7 @@ import { createOvertimeInFirebase } from "@/helpers/overtimeHandlers/createOvert
 import { useAppSelector } from "@/store/hooks";
 import React, { useState } from "react";
 import styles from "./OvertimeForm.module.css";
+import { useCloseModal } from "@/hooks/useCloseModal";
 
 type TOvertimeProps = {
   email: string;
@@ -9,32 +10,60 @@ type TOvertimeProps = {
 };
 
 const OvertimeForm = (props: TOvertimeProps) => {
-  const [overtimeValue, setOvertimeValue] = useState<string>("0");
+  const [overtimeValue, setOvertimeValue] = useState<number>(0);
   const {
     formType,
-    data: { start, title },
+    data: { title, id },
   } = useAppSelector((state) => state.modal);
+  const [closeModal, ,] = useCloseModal();
 
-  const overtimeFormHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
+  const overtimeFormHandler = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
-    createOvertimeInFirebase(start, props.email, overtimeValue);
+    createOvertimeInFirebase(overtimeValue.toString(), id);
+    closeModal();
+  };
+
+  const incrementHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.currentTarget.name === "+"
+      ? setOvertimeValue(overtimeValue + 1)
+      : setOvertimeValue(overtimeValue - 1);
   };
 
   return (
     <>
       {formType === "overtime" && title === props.workerName ? (
-        <form onSubmit={overtimeFormHandler}>
+        <form>
           <div className={styles.inputWrapper}>
             <label htmlFor="overtime">Overtime hours:</label>
-            <input
-              onChange={(e) => setOvertimeValue(e.target.value)}
-              type="number"
-              id="overtime"
-              name="overtime"
-              min="0"
-              max="8"
-            />
+            <div className={styles.counter}>
+              <button
+                name="-"
+                onClick={incrementHandler}
+                className={`${overtimeValue === 0 ? styles.disabled : ""}`}
+              >
+                -
+              </button>
+              <input
+                type="number"
+                id="overtime"
+                name="overtime"
+                min="0"
+                max="8"
+                value={overtimeValue}
+              />
+              <button
+                name="+"
+                onClick={incrementHandler}
+                className={`${overtimeValue === 8 ? styles.disabled : ""}`}
+              >
+                +
+              </button>
+            </div>
           </div>
+          <button onClick={overtimeFormHandler}>Submit</button>
         </form>
       ) : (
         title !== props.workerName && (
