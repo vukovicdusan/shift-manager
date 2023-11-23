@@ -23,7 +23,11 @@ const useAuth = () => {
       if (firebaseUser) {
         if (firebaseUser.email) {
           setUser({ uid: firebaseUser?.uid, email: firebaseUser?.email! });
-          dispatch(userHandler({ isAdmin: false, email: firebaseUser?.email }));
+          if (firebaseUser?.uid !== process.env.NEXT_PUBLIC_ADMIN_UID) {
+            dispatch(
+              userHandler({ isAdmin: false, email: firebaseUser?.email })
+            );
+          } else dispatch(userHandler({ isAdmin: true, email: "admin" }));
         }
       }
     });

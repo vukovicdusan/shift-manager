@@ -20,7 +20,7 @@ import { useAppSelector } from "@/store/hooks";
 
 const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
   const dispatch = useDispatch();
-  const { isAdmin } = useAppSelector((state) => state.user);
+  const { isAdmin, email } = useAppSelector((state) => state.user);
 
   //! MOVE CALENDAR HANDLERS TO THE CUSTOM HOOK..or don't
   const selectDatesHandler = (selectInfo: DateSelectArg) => {

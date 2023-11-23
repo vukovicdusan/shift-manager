@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { auth } from "@/firebase/firebase";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { isAdmin } from "@/helpers/workerHandlers/isAdmin";
 
 const useLogin = () => {
   const [input, setInput] = useState({ email: "", password: "" });
@@ -22,6 +23,7 @@ const useLogin = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setError(false);
+        isAdmin();
         router.push("/");
       })
       .catch((error) => {
