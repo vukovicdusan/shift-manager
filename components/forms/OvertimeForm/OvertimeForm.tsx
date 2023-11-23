@@ -62,8 +62,8 @@ const OvertimeForm = (props: TOvertimeProps) => {
                 +
               </button>
             </div>
+            <button onClick={overtimeFormHandler}>Submit</button>
           </div>
-          <button onClick={overtimeFormHandler}>Submit</button>
         </form>
       ) : (
         title !== props.workerName && (
