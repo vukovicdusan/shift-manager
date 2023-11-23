@@ -1,3 +1,8 @@
 .inputWrapper {
   composes: inputWrapper from "../../../styles/InputWrapper.module.css";
 }
+
+.message {
+  padding: var(--s0);
+  text-align: center;
+}

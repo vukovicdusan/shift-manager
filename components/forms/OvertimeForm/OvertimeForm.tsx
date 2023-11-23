@@ -38,8 +38,9 @@ const OvertimeForm = (props: TOvertimeProps) => {
         </form>
       ) : (
         title !== props.workerName && (
-          <p>
-            Sorry, you are not allowed to do this. Try clicking on your shift.
+          <p className={styles.message}>
+            Sorry, you are not allowed to do this. Try clicking on one of your
+            shifts.
           </p>
         )
       )}
