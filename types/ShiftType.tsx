@@ -4,6 +4,6 @@ export interface ShiftType {
   start: string;
   end: string;
   className: string;
-  overtime?: { hours: number; valid: boolean };
+  overtime?: { hours: number; authorized: boolean };
   allDay?: boolean;
 }

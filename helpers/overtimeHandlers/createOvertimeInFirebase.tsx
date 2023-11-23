@@ -10,7 +10,7 @@ export const createOvertimeInFirebase = async (
   try {
     await updateDoc(shiftRef, {
       edited: serverTimestamp(),
-      overtime: { hours: overtime, valid: false },
+      overtime: { hours: overtime, authorized: false },
     });
   } catch (err) {
     console.log("Something went wrong while editing the shift", err);

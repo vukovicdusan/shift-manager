@@ -22,9 +22,11 @@ const CurrentWorkersList = (props: WorkersProps) => {
     email: "",
     uid: "",
   });
-  const [monthSelect, setMonthSelect] = useState("All");
+  const [monthSelectValue, setMonthSelectValue] = useState("All");
   const currentYear = new Date().getFullYear().toString();
-  const [yearSelect, setYearSelect] = useState(currentYear);
+  const [yearSelectValue, setYearSelectValue] = useState(currentYear);
+  const [overtimeSelectValue, setOvertimeSelectValue] =
+    useState<string>("Authorized");
 
   const { value } = useAppSelector((state) => state.dashboardNav);
 
@@ -67,30 +69,34 @@ const CurrentWorkersList = (props: WorkersProps) => {
   };
 
   const shiftCounter = (name: String) => {
-    return monthSelect === "All"
+    return monthSelectValue === "All"
       ? props.shifts.filter(
-          (shift) => shift.title === name && getYear(shift.start) === yearSelect
+          (shift) =>
+            shift.title === name && getYear(shift.start) === yearSelectValue
         ).length
       : props.shifts.filter(
           (shift) =>
             shift.title === name &&
-            getMonth(shift.start) === monthSelect.toLowerCase() &&
-            getYear(shift.start) === yearSelect
+            getMonth(shift.start) === monthSelectValue.toLowerCase() &&
+            getYear(shift.start) === yearSelectValue
         ).length;
   };
 
   const overtimeCounter = (name: string) => {
     let workerArr = props.shifts.filter((shift) => shift.title === name);
-    let overtime: number = 0;
+    let overtimeAuthorized: number = 0;
+    let overtimeUnAuthorized: number = 0;
     workerArr.forEach((worker) => {
       if (worker.overtime) {
-        overtime += worker.overtime.hours;
+        worker.overtime.authorized
+          ? (overtimeAuthorized += +worker.overtime.hours)
+          : (overtimeUnAuthorized += +worker.overtime.hours);
       }
     });
-    return overtime;
+    if (overtimeSelectValue === "authorized") {
+      return overtimeAuthorized;
+    } else return overtimeUnAuthorized;
   };
-
-  console.log(overtimeCounter("Miloš"));
 
   return (
     <>
@@ -99,7 +105,7 @@ const CurrentWorkersList = (props: WorkersProps) => {
           <table className={styles.table}>
             <caption>
               <select
-                onChange={(e) => setYearSelect(e.target.value)}
+                onChange={(e) => setYearSelectValue(e.target.value)}
                 defaultValue={currentYear}
               >
                 {yearsArr.map((year, index) => (
@@ -117,7 +123,7 @@ const CurrentWorkersList = (props: WorkersProps) => {
                   <div className={styles.inputWrapper}>
                     <select
                       defaultValue={"All"}
-                      onChange={(e) => setMonthSelect(e.target.value)}
+                      onChange={(e) => setMonthSelectValue(e.target.value)}
                       name="month"
                       id="month"
                     >
@@ -129,7 +135,18 @@ const CurrentWorkersList = (props: WorkersProps) => {
                     </select>
                   </div>
                 </th>
-                <th>Overtime</th>
+                <th className={styles.textCenter}>
+                  Overtime{" "}
+                  <select
+                    defaultValue={"authorized"}
+                    name="overtime"
+                    id="overtime"
+                    onChange={(e) => setOvertimeSelectValue(e.target.value)}
+                  >
+                    <option value="authorized">Authorized</option>
+                    <option value="unauthorized">Unauthorized</option>
+                  </select>
+                </th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -138,8 +155,12 @@ const CurrentWorkersList = (props: WorkersProps) => {
                 (worker: WorkersFirebaseType, index: number) => (
                   <tr key={index}>
                     <td className={styles.worker}>{worker.name}</td>
-                    <td>{shiftCounter(worker.name)}</td>
-                    <td>0</td>
+                    <td className={styles.textCenter}>
+                      {shiftCounter(worker.name)}
+                    </td>
+                    <td colSpan={1} className={styles.textCenter}>
+                      {overtimeCounter(worker.name)}
+                    </td>
                     <td className={styles.action}>
                       <button
                         title="Remove worker"
