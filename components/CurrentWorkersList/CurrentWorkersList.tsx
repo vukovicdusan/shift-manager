@@ -26,7 +26,7 @@ const CurrentWorkersList = (props: WorkersProps) => {
 	const currentYear = new Date().getFullYear().toString();
 	const [yearSelectValue, setYearSelectValue] = useState(currentYear);
 	const [overtimeSelectValue, setOvertimeSelectValue] =
-		useState<string>("Authorized");
+		useState<string>("authorized");
 
 	const { value } = useAppSelector((state) => state.dashboardNav);
 
