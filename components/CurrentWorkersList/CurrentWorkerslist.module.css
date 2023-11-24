@@ -49,14 +49,14 @@
 }
 
 .closeIcon {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   fill: var(--error-color);
   transition: fill 0.2s ease;
 }
 
 .closeIcon:hover {
-  fill: var(--primary);
+  fill: white;
 }
 
 .dialog {

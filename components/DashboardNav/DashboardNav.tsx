@@ -21,6 +21,9 @@ const DashboardNav = () => {
             } fake-link`}
             onClick={() => buttonHandler("Workers")}
           >
+            <svg className={styles.icon}>
+              <use xlinkHref={"./svg/sprite.svg#workers"}></use>
+            </svg>{" "}
             Workers
           </button>
         </li>
@@ -31,6 +34,9 @@ const DashboardNav = () => {
             } fake-link`}
             onClick={() => buttonHandler("Add Worker")}
           >
+            <svg className={styles.icon}>
+              <use xlinkHref={"./svg/sprite.svg#add-worker"}></use>
+            </svg>{" "}
             Add Worker
           </button>
         </li>
