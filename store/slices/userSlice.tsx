@@ -5,6 +5,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type TUserSliceState = {
   isAdmin: boolean;
   email: string;
+  isLoggedIn: boolean;
 };
 const initialState = { isAdmin: false, email: "" } as TUserSliceState;
 
@@ -15,6 +16,7 @@ export const userSlice = createSlice({
     userHandler: (state, action: PayloadAction<TUserSliceState>) => {
       state.isAdmin = action.payload.isAdmin;
       state.email = action.payload.email;
+      state.isLoggedIn = action.payload.isLoggedIn;
     },
   },
 });

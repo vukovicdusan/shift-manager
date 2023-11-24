@@ -10,10 +10,12 @@ import useAuth from "@/hooks/useAuth";
 import { isAdmin } from "@/helpers/workerHandlers/isAdmin";
 import { nameExtractor } from "@/helpers/workerHandlers/nameExtractor";
 import { capitalize } from "@/helpers/capitalize";
+import { useAppSelector } from "@/store/hooks";
 
 const Header = () => {
   const [, , , logoutHandler, ,] = useLogin();
   const [isAuthorized, , user] = useAuth();
+  const { isLoggedIn } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     isAuthorized();
@@ -36,7 +38,7 @@ const Header = () => {
               priority
             ></Image>{" "}
           </Link>
-          {user.uid ? (
+          {isLoggedIn ? (
             <div className={styles.menu}>
               <div className={styles.userHandle}>
                 <span>{capitalize(name)}</span>

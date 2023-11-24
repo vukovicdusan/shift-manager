@@ -25,9 +25,16 @@ const useAuth = () => {
           setUser({ uid: firebaseUser?.uid, email: firebaseUser?.email! });
           if (firebaseUser?.uid !== process.env.NEXT_PUBLIC_ADMIN_UID) {
             dispatch(
-              userHandler({ isAdmin: false, email: firebaseUser?.email })
+              userHandler({
+                isAdmin: false,
+                email: firebaseUser?.email,
+                isLoggedIn: true,
+              })
             );
-          } else dispatch(userHandler({ isAdmin: true, email: "admin" }));
+          } else
+            dispatch(
+              userHandler({ isAdmin: true, email: "admin", isLoggedIn: true })
+            );
         }
       }
     });
@@ -40,7 +47,9 @@ const useAuth = () => {
         setUser({ uid: "", email: "" });
       } else {
         setUser({ uid: firebaseUser?.uid, email: firebaseUser?.email! });
-        dispatch(userHandler({ isAdmin: true, email: "admin" }));
+        dispatch(
+          userHandler({ isAdmin: true, email: "admin", isLoggedIn: true })
+        );
       }
     });
   };

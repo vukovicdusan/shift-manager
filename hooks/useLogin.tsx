@@ -3,11 +3,14 @@ import { auth } from "@/firebase/firebase";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { isAdmin } from "@/helpers/workerHandlers/isAdmin";
+import { useDispatch } from "react-redux";
+import { userHandler } from "@/store/slices/userSlice";
 
 const useLogin = () => {
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput((prevState) => ({
@@ -35,7 +38,9 @@ const useLogin = () => {
 
   const logoutHandler = () => {
     signOut(auth)
-      .then(() => {})
+      .then(() => {
+        dispatch(userHandler({ isAdmin: false, email: "", isLoggedIn: false }));
+      })
       .catch((error) => {});
   };
 
