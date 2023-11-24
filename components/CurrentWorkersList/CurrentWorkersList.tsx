@@ -7,6 +7,7 @@ import { useAppSelector } from "@/store/hooks";
 import { ShiftType } from "@/types/ShiftType";
 import { getMonth } from "@/helpers/getMonth";
 import { getYear } from "@/helpers/getYear";
+import Overtime from "../Overtime/Overtime";
 
 type WorkersProps = {
   workers: WorkersFirebaseType[];
@@ -82,22 +83,6 @@ const CurrentWorkersList = (props: WorkersProps) => {
         ).length;
   };
 
-  const overtimeCounter = (name: string) => {
-    let workerArr = props.shifts.filter((shift) => shift.title === name);
-    let overtimeAuthorized: number = 0;
-    let overtimeUnAuthorized: number = 0;
-    workerArr.forEach((worker) => {
-      if (worker.overtime) {
-        worker.overtime.authorized
-          ? (overtimeAuthorized += +worker.overtime.hours)
-          : (overtimeUnAuthorized += +worker.overtime.hours);
-      }
-    });
-    if (overtimeSelectValue === "authorized") {
-      return overtimeAuthorized;
-    } else return overtimeUnAuthorized;
-  };
-
   return (
     <>
       {value === "Workers" ? (
@@ -157,7 +142,11 @@ const CurrentWorkersList = (props: WorkersProps) => {
                       {shiftCounter(worker.name)}
                     </td>
                     <td colSpan={1} className={styles.textCenter}>
-                      {overtimeCounter(worker.name)}
+                      <Overtime
+                        authorizationFilter={overtimeSelectValue}
+                        worker={worker.name}
+                        shifts={props.shifts}
+                      ></Overtime>
                     </td>
                     <td className={styles.action}>
                       <button

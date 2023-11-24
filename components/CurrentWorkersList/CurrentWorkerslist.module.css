@@ -100,11 +100,16 @@
   border-color: var(--secondary);
 }
 
-.flex {
+.flex,
+.flexCol {
   display: flex;
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
+}
+
+.flexCol {
+  flex-direction: column;
 }
 
 .inputWrapper {
