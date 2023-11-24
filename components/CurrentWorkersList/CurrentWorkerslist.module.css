@@ -93,6 +93,11 @@
 
 .dialog button:hover {
   background-color: var(--background-light);
+  border-color: var(--error-color);
+}
+
+.dialog button:last-child:hover {
+  border-color: var(--secondary);
 }
 
 .flex {
