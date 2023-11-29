@@ -37,6 +37,9 @@
 }
 
 @media (max-width: 500px) {
+  .sidebarNav {
+    padding: var(--s0);
+  }
   .stack {
     flex-direction: row;
     justify-content: center;
@@ -49,5 +52,17 @@
 
   .sidebarNav {
     border-inline-end: none;
+  }
+
+  .icon {
+    width: 40px;
+    height: 25px;
+    transform: translateY(8px);
+  }
+
+  .sidebarNav li:nth-child(2) .icon {
+    width: 35px;
+    height: 20px;
+    transform: translateY(6px);
   }
 }
