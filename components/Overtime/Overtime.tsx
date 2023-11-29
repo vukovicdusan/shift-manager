@@ -63,7 +63,15 @@ const Overtime = (props: TOvertimeProp) => {
           <li>Hours: {overtime.overtimeHours}</li>
           <li>
             Authorized:{" "}
-            {overtime.overtimeIsAuthorized ? "Authorized" : "Unauthorized"}
+            <span
+              className={
+                overtime.overtimeIsAuthorized
+                  ? styles.authorized
+                  : styles.unauthorized
+              }
+            >
+              {overtime.overtimeIsAuthorized ? "Authorized" : "Unauthorized"}
+            </span>
           </li>
           {!overtime.overtimeIsAuthorized ? (
             <li>

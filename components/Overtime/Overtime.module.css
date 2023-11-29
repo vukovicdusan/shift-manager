@@ -22,3 +22,11 @@
 .overtimeList li {
   text-align: start;
 }
+
+.authorized {
+  color: var(--secondary);
+}
+
+.unauthorized {
+  color: var(--error-color);
+}
