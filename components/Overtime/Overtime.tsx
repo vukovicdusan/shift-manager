@@ -22,7 +22,7 @@ type TOvertime = {
 const Overtime = (props: TOvertimeProp) => {
   const shifts = props.shifts;
   const worker = props.worker;
-  const filter = props.authorizationFilter;
+  const filter = props.authorizationFilter === "authorized" ? true : false;
 
   let shiftsArr = shifts.filter((shift) => shift.title === worker);
 
@@ -46,14 +46,17 @@ const Overtime = (props: TOvertimeProp) => {
     }
   });
 
-  let overtimeSum =
-    filter === "authorized"
-      ? overtimeSumAuthorized.toString()
-      : overtimeSumUnAuthorized.toString();
+  let overtimeSum = filter
+    ? overtimeSumAuthorized.toString()
+    : overtimeSumUnAuthorized.toString();
+
+  let filteredOvertimesArr = overtimesArr.filter(
+    (overtime) => overtime.overtimeIsAuthorized === filter
+  );
 
   return (
     <Accordion title={overtimeSum}>
-      {overtimesArr.map((overtime, index) => (
+      {filteredOvertimesArr.map((overtime, index) => (
         <ul className={styles.overtimeList} key={index}>
           <li>Worker: {worker}</li>
           <li>Date: {formatMyDate(overtime.overtimeDate)}</li>

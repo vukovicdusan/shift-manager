@@ -10,4 +10,15 @@
 
 .overtimeList button {
   margin-top: var(--s0);
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+
+.overtimeList button:hover {
+  color: var(--text-light);
+  border-color: var(--text-light);
+}
+
+.overtimeList li {
+  text-align: start;
 }
