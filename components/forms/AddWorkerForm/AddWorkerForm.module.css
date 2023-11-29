@@ -38,4 +38,7 @@
   .flex {
     justify-content: center;
   }
+  .stack {
+    align-items: center;
+  }
 }
