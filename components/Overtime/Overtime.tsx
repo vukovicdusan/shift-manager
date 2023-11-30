@@ -9,6 +9,8 @@ type TOvertimeProp = {
   worker: string;
   shifts: ShiftType[];
   authorizationFilter: string;
+  monthFilter: string;
+  yearFilter: string;
 };
 
 type TOvertime = {
@@ -50,12 +52,20 @@ const Overtime = (props: TOvertimeProp) => {
     ? overtimeSumAuthorized.toString()
     : overtimeSumUnAuthorized.toString();
 
-  let filteredOvertimesArr = overtimesArr.filter(
+  let authorizedOvertimesArr = overtimesArr.filter(
     (overtime) => overtime.overtimeIsAuthorized === filter
   );
 
+  let unauthorizedOvertimesArr = overtimesArr.filter(
+    (overtime) => overtime.overtimeIsAuthorized === filter
+  );
+
+  let filteredOvertimesArr = filter
+    ? authorizedOvertimesArr
+    : unauthorizedOvertimesArr;
+
   return (
-    <Accordion title={overtimeSum}>
+    <Accordion title={overtimeSum + "h"}>
       {filteredOvertimesArr.map((overtime, index) => (
         <ul className={styles.overtimeList} key={index}>
           <li>Worker: {worker}</li>

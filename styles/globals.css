@@ -245,6 +245,7 @@ h6 {
 input,
 select,
 textarea {
+  font-family: inherit !important;
   padding: 0.3rem;
   border: 1px solid #ccc;
   border-radius: 4px;

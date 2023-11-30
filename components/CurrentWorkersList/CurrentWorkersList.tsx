@@ -14,6 +14,8 @@ type WorkersProps = {
   shifts: ShiftType[];
 };
 
+const currentYear = new Date().getFullYear().toString();
+
 const CurrentWorkersList = (props: WorkersProps) => {
   const [, , , removeWorkerFromFirebase] = useWorker();
   const [openDialog, setOpenDialog] = useState(false);
@@ -24,7 +26,6 @@ const CurrentWorkersList = (props: WorkersProps) => {
     uid: "",
   });
   const [monthSelectValue, setMonthSelectValue] = useState("All");
-  const currentYear = new Date().getFullYear().toString();
   const [yearSelectValue, setYearSelectValue] = useState(currentYear);
   const [overtimeSelectValue, setOvertimeSelectValue] =
     useState<string>("authorized");
@@ -143,6 +144,8 @@ const CurrentWorkersList = (props: WorkersProps) => {
                     </td>
                     <td colSpan={1} className={styles.textCenter}>
                       <Overtime
+                        yearFilter={yearSelectValue}
+                        monthFilter={monthSelectValue}
                         authorizationFilter={overtimeSelectValue}
                         worker={worker.name}
                         shifts={props.shifts}
