@@ -28,7 +28,7 @@ const CurrentWorkersList = (props: WorkersProps) => {
   const [monthSelectValue, setMonthSelectValue] = useState("All");
   const [yearSelectValue, setYearSelectValue] = useState(currentYear);
   const [overtimeSelectValue, setOvertimeSelectValue] =
-    useState<string>("authorized");
+    useState<string>("unauthorized");
 
   const { value } = useAppSelector((state) => state.dashboardNav);
 
@@ -122,13 +122,13 @@ const CurrentWorkersList = (props: WorkersProps) => {
                 <th className={styles.textCenter}>
                   Overtime{" "}
                   <select
-                    defaultValue={"authorized"}
+                    defaultValue={"unauthorized"}
                     name="overtime"
                     id="overtime"
                     onChange={(e) => setOvertimeSelectValue(e.target.value)}
                   >
-                    <option value="authorized">Authorized</option>
                     <option value="unauthorized">Unauthorized</option>
+                    <option value="authorized">Authorized</option>
                   </select>
                 </th>
                 <th>Remove</th>
