@@ -90,35 +90,35 @@ const CurrentWorkersList = (props: WorkersProps) => {
         <>
           <table className={styles.table}>
             <caption>
-              <select
-                onChange={(e) => setYearSelectValue(e.target.value)}
-                defaultValue={currentYear}
-              >
-                {yearsArr.map((year, index) => (
-                  <option key={index} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
+              <div>
+                <select
+                  onChange={(e) => setYearSelectValue(e.target.value)}
+                  defaultValue={currentYear}
+                >
+                  {yearsArr.map((year, index) => (
+                    <option key={index} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  defaultValue={"All"}
+                  onChange={(e) => setMonthSelectValue(e.target.value)}
+                  name="month"
+                  id="month"
+                >
+                  {monthsArr.map((month, index) => (
+                    <option key={index} value={month}>
+                      {month}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </caption>
             <thead>
               <tr>
                 <th>Worker</th>
-                <th className={styles.textCenter}>
-                  Shifts
-                  <select
-                    defaultValue={"All"}
-                    onChange={(e) => setMonthSelectValue(e.target.value)}
-                    name="month"
-                    id="month"
-                  >
-                    {monthsArr.map((month, index) => (
-                      <option key={index} value={month}>
-                        {month}
-                      </option>
-                    ))}
-                  </select>
-                </th>
+                <th className={styles.textCenter}>Shifts</th>
                 <th className={styles.textCenter}>
                   Overtime{" "}
                   <select
@@ -131,7 +131,7 @@ const CurrentWorkersList = (props: WorkersProps) => {
                     <option value="unauthorized">Unauthorized</option>
                   </select>
                 </th>
-                <th>Action</th>
+                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
@@ -139,10 +139,13 @@ const CurrentWorkersList = (props: WorkersProps) => {
                 (worker: WorkersFirebaseType, index: number) => (
                   <tr key={index}>
                     <td className={styles.worker}>{worker.name}</td>
-                    <td className={styles.textCenter}>
+                    <td className={`${styles.textCenter} ${styles.alignTop}`}>
                       {shiftCounter(worker.name)}
                     </td>
-                    <td colSpan={1} className={styles.textCenter}>
+                    <td
+                      colSpan={1}
+                      className={`${styles.textCenter} ${styles.alignTop}`}
+                    >
                       <Overtime
                         yearFilter={yearSelectValue}
                         monthFilter={monthSelectValue}

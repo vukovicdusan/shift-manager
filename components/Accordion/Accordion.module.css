@@ -25,6 +25,7 @@
   composes: dFlex from "@/styles/DFlex.module.css";
   --gap: var(--s-1);
   --align: center;
+  --justify: center;
   cursor: pointer;
   padding-block: 0.4rem;
 }

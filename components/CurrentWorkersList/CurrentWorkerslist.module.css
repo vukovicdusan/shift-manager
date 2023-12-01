@@ -1,10 +1,18 @@
-.table caption {
+.table caption div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.table caption select:first-child {
   font-size: var(--s1);
 }
 
 .table caption select {
   border: 0;
 }
+
 .table {
   border: 1px var(--background-light) solid;
   width: 100%;
@@ -127,6 +135,10 @@
 
 .alignMiddle {
   vertical-align: middle;
+}
+
+.alignTop {
+  vertical-align: top;
 }
 
 .textCenter > select {
