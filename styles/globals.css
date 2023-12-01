@@ -14,10 +14,10 @@
   --s5: calc(var(--s4) * var(--ratio));
 
   /** ==== VARIABLES ==== */
-  --primary: #d2a8ff;
+  --primary: #08a5d4;
   --theme-primary: #083d77;
   --primary-shade: #b4c5d6;
-  --secondary: #7ee787;
+  --secondary: #08a5d4;
   --text-dark: #7d8590;
   --text-light: #e6edf3;
   --text-gray: #909090;

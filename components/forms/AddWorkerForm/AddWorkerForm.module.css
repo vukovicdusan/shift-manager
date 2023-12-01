@@ -31,7 +31,7 @@
 .flex {
   composes: dFlex from "../../../styles/DFlex.module.css";
   flex-wrap: wrap;
-  gap: var(--s2);
+  gap: var(--s2) !important;
 }
 
 @media (max-width: 500px) {

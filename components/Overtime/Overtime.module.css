@@ -10,8 +10,8 @@
 
 .overtimeList button {
   margin-top: var(--s0);
-  border-color: var(--secondary);
-  color: var(--secondary);
+  border-color: var(--success-color);
+  color: var(--success-color);
 }
 
 .overtimeList button:hover {
@@ -24,7 +24,7 @@
 }
 
 .authorized {
-  color: var(--secondary);
+  color: var(--success-color);
 }
 
 .unauthorized {
