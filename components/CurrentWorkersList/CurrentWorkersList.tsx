@@ -48,8 +48,8 @@ const CurrentWorkersList = (props: WorkersProps) => {
     "December",
   ];
 
-  const yearsArr: string[] = [];
-  props.shifts.map((shift) => {
+  let yearsArr: string[] = [];
+  props.shifts.forEach((shift) => {
     if (getYear(shift.start) && !yearsArr.includes(getYear(shift.start))) {
       yearsArr.push(getYear(shift.start));
     }

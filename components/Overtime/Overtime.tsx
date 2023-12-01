@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Accordion from "../Accordion/Accordion";
 import { ShiftType } from "@/types/ShiftType";
 import { formatMyDate } from "@/helpers/formatMyDate";
 import styles from "./Overtime.module.css";
 import { authorizeOvertimeInFirebase } from "@/helpers/overtimeHandlers/authorizeOvertimeInFirebase";
+import { getYear } from "@/helpers/getYear";
+import { getMonth } from "@/helpers/getMonth";
 
 type TOvertimeProp = {
   worker: string;
@@ -34,17 +36,27 @@ const Overtime = (props: TOvertimeProp) => {
 
   shiftsArr.forEach((shift) => {
     if (shift.overtime) {
-      shift.overtime.authorized
-        ? (overtimeSumAuthorized += +shift.overtime.hours)
-        : (overtimeSumUnAuthorized += +shift.overtime.hours);
+      let properYear = getYear(shift.start) === props.yearFilter;
+      let isMonthAll = props.monthFilter === "All";
+      let properMonth =
+        isMonthAll || getMonth(shift.start) === props.monthFilter.toLowerCase();
 
-      overtimesArr.push({
-        overtimeDate: shift.start,
-        overtimeShiftId: shift.id,
-        overtimeHours: shift.overtime?.hours.toString(),
-        overtimeIsAuthorized: shift.overtime?.authorized,
-        worker,
-      });
+      if (properYear && properMonth) {
+        let authorized = shift.overtime.authorized;
+        let hours = +shift.overtime.hours;
+
+        authorized
+          ? (overtimeSumAuthorized += hours)
+          : (overtimeSumUnAuthorized += hours);
+
+        overtimesArr.push({
+          overtimeDate: shift.start,
+          overtimeShiftId: shift.id,
+          overtimeHours: shift.overtime?.hours.toString(),
+          overtimeIsAuthorized: shift.overtime?.authorized,
+          worker,
+        });
+      }
     }
   });
 
@@ -52,17 +64,11 @@ const Overtime = (props: TOvertimeProp) => {
     ? overtimeSumAuthorized.toString()
     : overtimeSumUnAuthorized.toString();
 
-  let authorizedOvertimesArr = overtimesArr.filter(
-    (overtime) => overtime.overtimeIsAuthorized === filter
+  let filteredOvertimesArr = overtimesArr.filter(
+    (overtime) =>
+      overtime.overtimeIsAuthorized === filter &&
+      getYear(overtime.overtimeDate) === props.yearFilter
   );
-
-  let unauthorizedOvertimesArr = overtimesArr.filter(
-    (overtime) => overtime.overtimeIsAuthorized === filter
-  );
-
-  let filteredOvertimesArr = filter
-    ? authorizedOvertimesArr
-    : unauthorizedOvertimesArr;
 
   return (
     <Accordion title={overtimeSum + "h"}>
@@ -96,9 +102,7 @@ const Overtime = (props: TOvertimeProp) => {
                 Authorize
               </button>
             </li>
-          ) : (
-            ""
-          )}
+          ) : null}
         </ul>
       ))}
     </Accordion>
