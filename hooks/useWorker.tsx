@@ -15,6 +15,11 @@ const useWorker = () => {
     repeatPassword: "",
   });
   const [passwordError, setPasswordError] = useState(false);
+  const [inputError, setInputError] = useState(false);
+
+  // const inputChecker = (username, email) => {
+  //   username
+  // };
 
   useEffect(() => {
     passwordRepeatChecker(input.password, input.repeatPassword)

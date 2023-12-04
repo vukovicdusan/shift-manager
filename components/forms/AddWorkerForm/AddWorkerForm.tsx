@@ -27,6 +27,7 @@ const AddWorkerForm = () => {
                   autoCapitalize="off"
                   autoCorrect="off"
                   required
+                  // pattern="[^()/><\\][\\\x22,;|@]+"
                   onChange={inputHandler}
                 />
               </div>
