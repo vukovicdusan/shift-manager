@@ -321,6 +321,28 @@ button:hover {
   align-items: center;
 }
 
+.flex.space-between {
+  justify-content: space-between;
+}
+
+.shift-info {
+  width: 100%;
+}
+
+.shift-info span {
+  /* font-weight: 600; */
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 100px;
+}
+
+.authorized {
+  color: var(--success-color);
+}
+
+.unauthorized {
+  color: var(--error-color);
+}
+
 /* fullCalendar */
 .fc-col-header-cell-cushion {
   color: var(--text-dark);
