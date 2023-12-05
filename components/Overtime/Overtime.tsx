@@ -6,6 +6,7 @@ import styles from "./Overtime.module.css";
 import { authorizeOvertimeInFirebase } from "@/helpers/overtimeHandlers/authorizeOvertimeInFirebase";
 import { getYear } from "@/helpers/getYear";
 import { getMonth } from "@/helpers/getMonth";
+import { useRouter } from "next/navigation";
 
 type TOvertimeProp = {
   worker: string;
@@ -24,6 +25,7 @@ type TOvertime = {
 };
 
 const Overtime = (props: TOvertimeProp) => {
+  const router = useRouter();
   const shifts = props.shifts;
   const worker = props.worker;
   const filter = props.authorizationFilter === "authorized" ? true : false;
@@ -70,6 +72,13 @@ const Overtime = (props: TOvertimeProp) => {
       getYear(overtime.overtimeDate) === props.yearFilter
   );
 
+  const authorizeOvertimeHandler = (shiftId: string, hours: string) => {
+    authorizeOvertimeInFirebase(shiftId, hours ? hours : "");
+    setTimeout(() => {
+      router.refresh();
+    }, 1000);
+  };
+
   return (
     <Accordion title={overtimeSum + "h"}>
       {filteredOvertimesArr.map((overtime, index) => (
@@ -93,7 +102,7 @@ const Overtime = (props: TOvertimeProp) => {
             <li>
               <button
                 onClick={(e) =>
-                  authorizeOvertimeInFirebase(
+                  authorizeOvertimeHandler(
                     overtime.overtimeShiftId,
                     overtime.overtimeHours ? overtime.overtimeHours : ""
                   )

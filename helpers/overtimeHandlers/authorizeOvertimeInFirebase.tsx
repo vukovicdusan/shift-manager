@@ -12,6 +12,6 @@ export const authorizeOvertimeInFirebase = async (
       overtime: { hours: overtimeHours, authorized: true },
     });
   } catch (err) {
-    console.log("Something went wrong while editing the shift", err);
+    console.log("Something went wrong while authorizing the overtime", err);
   }
 };
