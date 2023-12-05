@@ -24,8 +24,17 @@
   align-items: flex-start;
 }
 
+.inputWrapperColumn label {
+  font-weight: 600;
+}
+
 .error {
   border-color: var(--error-color);
+}
+
+.textError {
+  color: var(--error-color);
+  font-size: small;
 }
 
 .flex {
@@ -35,10 +44,11 @@
 }
 
 @media (max-width: 500px) {
-  .flex {
-    justify-content: center;
-  }
   .stack {
+    align-items: center;
+  }
+
+  .form {
     align-items: center;
   }
 }

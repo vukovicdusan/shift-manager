@@ -6,6 +6,11 @@ import React, { useEffect, useState } from "react";
 import { deleteUser } from "@/actions/deleteUser";
 import { useRouter } from "next/navigation";
 
+type TUsernameCheckerParams = {
+  error: boolean;
+  message: string;
+};
+
 const useWorker = () => {
   const router = useRouter();
   const [input, setInput] = useState({
@@ -15,17 +20,53 @@ const useWorker = () => {
     repeatPassword: "",
   });
   const [passwordError, setPasswordError] = useState(false);
-  const [inputError, setInputError] = useState(false);
+  const [usernameError, setUsernameError] = useState<TUsernameCheckerParams>({
+    error: false,
+    message: "",
+  });
+  const [emailError, setEmailError] = useState<TUsernameCheckerParams>({
+    error: false,
+    message: "",
+  });
 
-  // const inputChecker = (username, email) => {
-  //   username
-  // };
+  const inputChecker = (username?: string, email?: string) => {
+    const usernamePattern = /^[a-zA-Z0-9]+$/;
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (username) {
+      if (usernamePattern.test(username)) {
+        setUsernameError({
+          error: false,
+          message: "",
+        });
+      } else {
+        setUsernameError({
+          error: true,
+          message: "Name should include only letters.",
+        });
+      }
+    }
+    if (email) {
+      if (emailPattern.test(email)) {
+        setEmailError({
+          error: false,
+          message: "",
+        });
+      } else {
+        setEmailError({
+          error: true,
+          message: "Please enter a real mail.",
+        });
+      }
+    }
+  };
 
   useEffect(() => {
+    inputChecker(input.username, input.email);
+
     passwordRepeatChecker(input.password, input.repeatPassword)
       ? setPasswordError(false)
       : setPasswordError(true);
-  }, [input.password, input.repeatPassword]);
+  }, [input.password, input.repeatPassword, input.email, input.username]);
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput((prevState) => ({
@@ -68,6 +109,8 @@ const useWorker = () => {
     createWorkerInFirebase,
     passwordError,
     removeWorkerFromFirebase,
+    usernameError,
+    emailError,
   ] as const;
 };
 
