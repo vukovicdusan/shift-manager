@@ -2,7 +2,6 @@ import { EventContentArg } from "@fullcalendar/core";
 
 export const renderEventContent = (shiftInfo: EventContentArg) => {
   const isDay = shiftInfo.event.classNames[0] === "day" ? "day" : "night";
-  // console.log("extended props", shiftInfo.event.extendedProps.overtime.hours);
   return (
     <>
       <div className="flex">

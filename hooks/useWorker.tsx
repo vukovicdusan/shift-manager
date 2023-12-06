@@ -111,6 +111,7 @@ const useWorker = () => {
     removeWorkerFromFirebase,
     usernameError,
     emailError,
+    input,
   ] as const;
 };
 

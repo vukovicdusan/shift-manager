@@ -36,7 +36,7 @@
   transform: translateY(9px);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 568px) {
   .sidebarNav {
     padding: var(--s0);
   }

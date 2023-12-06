@@ -35,6 +35,11 @@
 .textError {
   color: var(--error-color);
   font-size: small;
+  margin-top: 2px;
+}
+
+.noError {
+  visibility: hidden;
 }
 
 .flex {
@@ -43,7 +48,12 @@
   gap: var(--s2) !important;
 }
 
-@media (max-width: 500px) {
+.disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+@media (max-width: 568px) {
   .stack {
     align-items: center;
   }

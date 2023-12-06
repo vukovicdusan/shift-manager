@@ -12,8 +12,17 @@ const AddWorkerForm = () => {
     ,
     usernameError,
     emailError,
+    input,
   ] = useWorker();
   const { value } = useAppSelector((state) => state.dashboardNav);
+
+  let inputIsEmpty =
+    input.email !== "" &&
+    input.username !== "" &&
+    input.password !== "" &&
+    input.repeatPassword !== "";
+
+  console.log(inputIsEmpty);
 
   return (
     <>
@@ -83,7 +92,19 @@ const AddWorkerForm = () => {
               />
             </div>
           </div>
-          <button type="submit">Add Worker</button>
+          <button
+            className={`${
+              emailError.error ||
+              passwordError ||
+              usernameError.error ||
+              !inputIsEmpty
+                ? styles.disabled
+                : styles.enabled
+            }`}
+            type="submit"
+          >
+            Add Worker
+          </button>
         </form>
       ) : (
         ""

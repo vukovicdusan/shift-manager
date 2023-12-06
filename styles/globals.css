@@ -330,7 +330,8 @@ button:hover {
 }
 
 .shift-info span {
-  /* font-weight: 600; */
+  font-size: small;
+  padding: 2px;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 100px;
 }
@@ -343,7 +344,7 @@ button:hover {
   color: var(--error-color);
 }
 
-/* fullCalendar */
+/* FULLCALENDAR */
 .fc-col-header-cell-cushion {
   color: var(--text-dark);
 }
