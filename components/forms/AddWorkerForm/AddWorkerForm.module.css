@@ -61,4 +61,9 @@
   .form {
     align-items: center;
   }
+
+  .inputWrapperColumn {
+    justify-content: center;
+    align-items: center;
+  }
 }
