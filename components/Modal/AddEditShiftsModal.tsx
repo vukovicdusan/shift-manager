@@ -18,10 +18,13 @@ const Modal = (props: ModalProps) => {
   const { isAdmin, email } = useAppSelector((state) => state.user);
 
   let workerName: string = "";
+
   let userWorker = props.workers.filter((worker) => worker.email === email);
+
   userWorker.map((worker) => {
     workerName = worker.name;
   });
+
   return (
     <>
       {isOpen ? (

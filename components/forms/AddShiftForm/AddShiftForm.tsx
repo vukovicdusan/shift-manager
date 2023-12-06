@@ -121,12 +121,13 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
         )}
         <div className={styles.inputWrapper}>
           <select
-            defaultValue={classNames[0] === "night" ? "night" : "day"}
+            defaultValue={classNames[0]}
             onChange={selectHandler}
             name="shift-type"
             id="shift-type"
           >
             <option value="day">Day shift</option>
+            <option value="mid">Mid shift</option>
             <option value="night">Night shift</option>
           </select>
         </div>

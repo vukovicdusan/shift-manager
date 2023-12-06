@@ -304,6 +304,11 @@ button:hover {
   border-color: #7d95ff;
 }
 
+.mid {
+  background-color: #fdc573;
+  border-color: #fdc573;
+}
+
 .day:hover,
 .night:hover {
   opacity: 0.7;
