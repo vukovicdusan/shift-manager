@@ -62,7 +62,7 @@
 
   .sidebarNav li:nth-child(2) .icon {
     width: 35px;
-    height: 20px;
+    height: 25px;
     transform: translateY(6px);
   }
 }
