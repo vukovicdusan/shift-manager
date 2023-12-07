@@ -142,7 +142,9 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
           <div className={styles.overtime}>
             <p
               className={
-                overtime.authorized ? styles.authorized : styles.unauthorized
+                overtime && overtime.authorized
+                  ? styles.authorized
+                  : styles.unauthorized
               }
             >
               {overtime &&
@@ -152,7 +154,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
                   overtime.hours +
                   "h"}
             </p>
-            {!overtime.authorized && (
+            {overtime && !overtime.authorized && (
               <div className={styles.inputWrapper}>
                 <input
                   className={styles.styledCheckbox}
