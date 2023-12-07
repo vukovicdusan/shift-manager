@@ -18,6 +18,7 @@ export const useCloseModal = () => {
           id: "",
           title: "",
           classNames: [""],
+          overtime: { hours: "", authorized: false },
         },
       })
     );
