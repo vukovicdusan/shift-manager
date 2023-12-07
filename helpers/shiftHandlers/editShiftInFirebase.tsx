@@ -5,7 +5,8 @@ export const editShiftInFirebase = async (
   shiftId: string,
   start: string,
   end: string,
-  shiftType: string
+  shiftType: string,
+  overtimeAuthorization: boolean
 ) => {
   const shiftRef = doc(db, "shifts", shiftId);
 
@@ -19,6 +20,7 @@ export const editShiftInFirebase = async (
       id: shiftId,
       className: shiftType,
       edited: serverTimestamp(),
+      "overtime.authorized": overtimeAuthorization,
     });
   } catch (err) {
     console.log("Something went wrong while editing the shift", err);

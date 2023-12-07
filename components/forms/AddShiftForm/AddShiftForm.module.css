@@ -59,3 +59,18 @@
 .title {
   color: var(--secondary);
 }
+
+.overtime {
+  color: white;
+}
+
+.overtime p {
+  margin-bottom: 5px;
+}
+
+.authorized {
+  color: var(--success-color);
+}
+.unauthorized {
+  color: var(--error-color);
+}

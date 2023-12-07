@@ -52,6 +52,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
           id: "",
           title: "",
           classNames: [""],
+          overtime: { hours: "", authorized: false },
         },
       })
     );
@@ -69,6 +70,7 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
           id: clickInfo.event.id,
           title: clickInfo.event.title,
           classNames: clickInfo.event.classNames,
+          overtime: clickInfo.event.extendedProps.overtime,
         },
       })
     );

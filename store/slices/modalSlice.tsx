@@ -12,6 +12,7 @@ interface ModalInitStateType {
     id: string;
     title: string;
     classNames: string[];
+    overtime: { hours: string; authorized: boolean };
   };
 }
 
@@ -25,6 +26,7 @@ const initialState: ModalInitStateType = {
     id: "",
     title: "",
     classNames: [""],
+    overtime: { hours: "", authorized: false },
   },
 };
 

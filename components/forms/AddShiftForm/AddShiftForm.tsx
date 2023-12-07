@@ -12,12 +12,19 @@ import { deleteShiftFromFirebase } from "@/helpers/shiftHandlers/deleteShiftFrom
 import { useCloseModal } from "@/hooks/useCloseModal";
 import { formatMyDate } from "@/helpers/formatMyDate";
 import Center from "@/components/Center/Center";
-import { adjustDateForNightShift } from "@/helpers/adjustDateForNightShift";
 
 const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
   const {
     formType,
-    data: { start, end, alreadyAssignedWorkers, id, title, classNames },
+    data: {
+      start,
+      end,
+      alreadyAssignedWorkers,
+      id,
+      title,
+      classNames,
+      overtime,
+    },
   } = useAppSelector((state) => state.modal);
 
   const [closeModal, reload] = useCloseModal();
@@ -29,6 +36,8 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
     selectHandler,
     editedDate,
     editDateHandler,
+    overtimeAuthorization,
+    overtimeAuthorizationHandler,
   ] = useShiftForm();
 
   const addShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
@@ -40,7 +49,13 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
 
   const editShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await editShiftInFirebase(id, editedDate.start, editedDate.end, shiftType);
+    await editShiftInFirebase(
+      id,
+      editedDate.start,
+      editedDate.end,
+      shiftType,
+      overtimeAuthorization
+    );
     closeModal();
     reload();
   };
@@ -124,7 +139,33 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
             ))}
           </Accordion>
         ) : (
-          ""
+          <div className={styles.overtime}>
+            <p
+              className={
+                overtime.authorized ? styles.authorized : styles.unauthorized
+              }
+            >
+              {overtime &&
+                (overtime.authorized
+                  ? "Overtime authorized: "
+                  : "Overtime requested: ") +
+                  overtime.hours +
+                  "h"}
+            </p>
+            {!overtime.authorized && (
+              <div className={styles.inputWrapper}>
+                <input
+                  className={styles.styledCheckbox}
+                  type="checkbox"
+                  name="authorize"
+                  id="authorize"
+                  onChange={overtimeAuthorizationHandler}
+                  value="Authorize"
+                ></input>
+                <label htmlFor="authorize">AUTHORIZE</label>
+              </div>
+            )}
+          </div>
         )}
         <div className={styles.inputWrapper}>
           <select
