@@ -12,6 +12,7 @@ import { deleteShiftFromFirebase } from "@/helpers/shiftHandlers/deleteShiftFrom
 import { useCloseModal } from "@/hooks/useCloseModal";
 import { formatMyDate } from "@/helpers/formatMyDate";
 import Center from "@/components/Center/Center";
+import { adjustDateForNightShift } from "@/helpers/adjustDateForNightShift";
 
 const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
   const {
@@ -32,7 +33,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
 
   const addShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await createShiftInFirebase(start, start, assignedWorkers, shiftType);
+    await createShiftInFirebase(start, end, assignedWorkers, shiftType);
     closeModal();
     reload();
   };
@@ -65,7 +66,13 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
         <h3>
           {isAddForm ? "Assign Workers" : "Edit shift for "}
           {isAddForm ? "" : <span className={styles.title}>{title}</span>}
-          {/* {<>{formatMyDate("2023-11-02T08:00:00")}</>} */}
+          {
+            <>
+              {
+                // formatMyDate("2023-11-02T08:00:00")
+              }
+            </>
+          }
         </h3>
       </Center>
       <div className={styles.wrap}>
@@ -88,7 +95,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
             type="text"
             id="end"
             name="end"
-            defaultValue={formatMyDate(start)}
+            defaultValue={formatMyDate(end)}
             // defaultValue={
             //   shiftType !== "day" ? formatMyDate(start) : formatMyDate(end)
             // }
