@@ -35,7 +35,7 @@ const useShiftForm = () => {
   ) => {
     const { name, checked } = e.target;
     setOvertimeAuthorization(checked ? true : false);
-    console.log(name, checked);
+    // console.log(name, checked);
   };
 
   return [

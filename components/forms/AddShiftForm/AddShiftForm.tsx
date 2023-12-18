@@ -54,7 +54,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
       editedDate.start,
       editedDate.end,
       shiftType,
-      overtimeAuthorization
+      overtimeAuthorization ?? overtimeAuthorization
     );
     closeModal();
     reload();

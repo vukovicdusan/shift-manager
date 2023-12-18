@@ -14,14 +14,19 @@ export const editShiftInFirebase = async (
     const dayShift = shiftType === "day";
     // const startWorkHours = dayShift ? "T08:00:00" : "T20:00:00";
     // const endWorkHours = dayShift ? "T20:00:00" : "T00:00:00";
-    await updateDoc(shiftRef, {
+
+    let editedShiftData = {
       start: start,
       end: end,
       id: shiftId,
       className: shiftType,
       edited: serverTimestamp(),
-      "overtime.authorized": overtimeAuthorization,
-    });
+      ...(overtimeAuthorization && {
+        "overtime.authorized": overtimeAuthorization,
+      }),
+    };
+
+    await updateDoc(shiftRef, editedShiftData);
   } catch (err) {
     console.log("Something went wrong while editing the shift", err);
   }
