@@ -1,4 +1,4 @@
-export const adjustDateForDayShift = (date: string) => {
+export const shiftDateLimiter = (date: string) => {
   const arr = date.split("-");
   const dayInt = parseInt(arr[2], 10);
   const addZero = dayInt <= 10 ? "0" : "";
