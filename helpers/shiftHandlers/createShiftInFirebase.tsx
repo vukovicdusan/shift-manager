@@ -3,6 +3,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 import { adjustDateForNightShift } from "../adjustDateForNightShift";
 import { formatMyDate } from "../formatMyDate";
+import { adjustDateForDayShift } from "../adjustDateForDayShift";
+import { shiftStartEndHours } from "../shiftStartEndHours";
 
 export const createShiftInFirebase = async (
   start: string,
@@ -11,20 +13,17 @@ export const createShiftInFirebase = async (
   shiftType: string
 ) => {
   for (const worker of assignedWorkers) {
-    const dayShift = shiftType === "day";
-    // const startWorkHours = dayShift ? "T08:00:00" : "T20:00:00";
-    // const endWorkHours = dayShift ? "T20:00:00" : "T00:00:00";
-
+    console.log(shiftStartEndHours("night", "endHours"));
     try {
       let newId = uuidv4();
       await setDoc(
         doc(db, "shifts", formatMyDate(start, "noslash") + "-" + newId),
         {
           title: worker,
-          // start: start + startWorkHours,
-          start: start,
-          //   end: (dayShift ? end : adjustDateForNightShift(end)) + endWorkHours,
-          end: end,
+          start: start + shiftStartEndHours(shiftType, "startHours"),
+          end:
+            adjustDateForDayShift(end) +
+            shiftStartEndHours(shiftType, "endHours"),
           id: formatMyDate(start, "noslash") + "-" + newId,
           className: shiftType,
         }

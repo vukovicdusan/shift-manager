@@ -81,8 +81,8 @@ const CalendarComponent = ({ shifts }: { shifts: ShiftType[] }) => {
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
       firstDay={1}
       headerToolbar={{
-        // start: "prev dayGridMonth timeGridWeek timeGridDay",
-        start: "prev dayGridMonth",
+        start: "prev dayGridMonth timeGridWeek timeGridDay",
+        // start: "prev dayGridMonth",
         center: "title",
         end: "today next",
       }}

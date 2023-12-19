@@ -1,5 +1,8 @@
 import { db } from "@/firebase/firebase";
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { adjustDateForNightShift } from "../adjustDateForNightShift";
+import { adjustDateForDayShift } from "../adjustDateForDayShift";
+import { shiftStartEndHours } from "../shiftStartEndHours";
 
 export const editShiftInFirebase = async (
   shiftId: string,
@@ -11,13 +14,10 @@ export const editShiftInFirebase = async (
   const shiftRef = doc(db, "shifts", shiftId);
 
   try {
-    const dayShift = shiftType === "day";
-    // const startWorkHours = dayShift ? "T08:00:00" : "T20:00:00";
-    // const endWorkHours = dayShift ? "T20:00:00" : "T00:00:00";
-
     let editedShiftData = {
-      start: start,
-      end: end,
+      start: start + shiftStartEndHours(shiftType, "startHours"),
+      end:
+        adjustDateForDayShift(end) + shiftStartEndHours(shiftType, "endHours"),
       id: shiftId,
       className: shiftType,
       edited: serverTimestamp(),
