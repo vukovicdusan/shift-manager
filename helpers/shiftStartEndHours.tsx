@@ -12,7 +12,7 @@ export const shiftStartEndHours = (shift: string, modifier: string) => {
       break;
     case "night":
       startWorkHours = "T20:00:00";
-      endWorkHours = "T08:00:00";
+      endWorkHours = "T24:00:00";
       break;
   }
   let returnHours = modifier === "startHours" ? startWorkHours : endWorkHours;

@@ -1,6 +1,6 @@
 "use client";
-import useAuth from "@/hooks/useAuth";
-import { ChildrenPropsType } from "@/types/ChildrenPropsType";
+import useAuth from "../../hooks/useAuth";
+import { ChildrenPropsType } from "../../types/ChildrenPropsType";
 import React, { useEffect } from "react";
 
 const AdminProtectedPage = ({ children }: ChildrenPropsType) => {
