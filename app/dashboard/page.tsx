@@ -21,7 +21,7 @@ const Dashboard = async () => {
             workers={workers}
             shifts={shifts}
           ></CurrentWorkersList>
-          <AddWorkerForm></AddWorkerForm>
+          <AddWorkerForm workers={workers}></AddWorkerForm>
         </div>
       </div>
     </AdminProtectedPage>

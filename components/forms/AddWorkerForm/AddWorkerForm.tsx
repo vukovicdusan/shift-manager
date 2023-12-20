@@ -3,8 +3,13 @@ import styles from "./AddWorkerForm.module.css";
 import React from "react";
 import useWorker from "@/hooks/useWorker";
 import { useAppSelector } from "@/store/hooks";
+import { WorkersFirebaseType } from "@/types/WorkersFirebaseType";
 
-const AddWorkerForm = () => {
+type WorkersProp = {
+  workers: WorkersFirebaseType[];
+};
+
+const AddWorkerForm = (props: WorkersProp) => {
   const [
     inputHandler,
     createWorkerInFirebase,
@@ -14,6 +19,7 @@ const AddWorkerForm = () => {
     emailError,
     input,
   ] = useWorker();
+
   const { value } = useAppSelector((state) => state.dashboardNav);
 
   let inputIsEmpty =
@@ -22,14 +28,14 @@ const AddWorkerForm = () => {
     input.password !== "" &&
     input.repeatPassword !== "";
 
-  console.log(inputIsEmpty);
+  let workersNames = props.workers.map((worker) => worker.name.toLowerCase());
 
   return (
     <>
       {value === "Add Worker" ? (
         <form
           onSubmit={(e: React.MouseEvent<HTMLFormElement>) =>
-            createWorkerInFirebase(e)
+            createWorkerInFirebase(e, workersNames)
           }
           className={styles.form}
         >

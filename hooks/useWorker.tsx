@@ -5,6 +5,8 @@ import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { deleteUser } from "@/actions/deleteUser";
 import { useRouter } from "next/navigation";
+import { capitalize } from "@/helpers/capitalize";
+import { WorkersFirebaseType } from "@/types/WorkersFirebaseType";
 
 type TUsernameCheckerParams = {
   error: boolean;
@@ -19,11 +21,14 @@ const useWorker = () => {
     password: "",
     repeatPassword: "",
   });
+
   const [passwordError, setPasswordError] = useState(false);
+
   const [usernameError, setUsernameError] = useState<TUsernameCheckerParams>({
     error: false,
     message: "",
   });
+
   const [emailError, setEmailError] = useState<TUsernameCheckerParams>({
     error: false,
     message: "",
@@ -31,7 +36,9 @@ const useWorker = () => {
 
   const inputChecker = (username?: string, email?: string) => {
     const usernamePattern = /^[a-zA-Z0-9]+$/;
+
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
     if (username) {
       if (usernamePattern.test(username)) {
         setUsernameError({
@@ -45,6 +52,7 @@ const useWorker = () => {
         });
       }
     }
+
     if (email) {
       if (emailPattern.test(email)) {
         setEmailError({
@@ -76,29 +84,43 @@ const useWorker = () => {
   };
 
   const createWorkerInFirebase = async (
-    e: React.MouseEvent<HTMLFormElement>
+    e: React.MouseEvent<HTMLFormElement>,
+    workersNames: string[]
   ) => {
     e.preventDefault();
 
-    await createUserWithEmailAndPassword(auth, input.email, input.password)
-      .then((userCredential) => {
-        addDoc(collection(db, "workers"), {
-          name: input.username,
-          email: input.email,
-          uid: userCredential.user.uid,
+    if (!workersNames.includes(input.username.toLowerCase())) {
+      await createUserWithEmailAndPassword(auth, input.email, input.password)
+        .then((userCredential) => {
+          addDoc(collection(db, "workers"), {
+            name: input.username,
+            email: input.email,
+            uid: userCredential.user.uid,
+          });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+
+          if (errorCode === "auth/email-already-in-use") {
+            let message = capitalize(error.code.split("-").join(" "));
+            setEmailError({
+              error: true,
+              message: message ? message : "",
+            });
+          }
         });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+    } else {
+      setUsernameError({
+        error: true,
+        message: "The worker with this name already exists.",
       });
+    }
   };
 
   const removeWorkerFromFirebase = async (
     workerId: string,
     workerUid: string
   ) => {
-    // e.preventDefault();
     await deleteDoc(doc(db, "workers", workerId));
     await deleteUser(workerUid);
     router.refresh();
