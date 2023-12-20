@@ -2,6 +2,7 @@ import CalendarComponent from "../components/CalendarComponent";
 import Modal from "../components/Modal/AddEditShiftsModal";
 import { getShifts, getWorkers } from "@/helpers/shiftHandlers/getData";
 import ProtectedPage from "./protected-page/protected-page";
+import WorkerInfoBoard from "@/components/WorkerInfoBoard/WorkerInfoBoard";
 
 export const revalidate = 0;
 
@@ -14,6 +15,7 @@ const Home = async () => {
       <ProtectedPage>
         <CalendarComponent shifts={shifts}></CalendarComponent>
       </ProtectedPage>
+      <WorkerInfoBoard></WorkerInfoBoard>
       <Modal workers={workers}></Modal>
     </>
   );
