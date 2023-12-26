@@ -15,7 +15,7 @@ const OvertimeForm = (props: TOvertimeProps) => {
     formType,
     data: { title, id },
   } = useAppSelector((state) => state.modal);
-  const [closeModal, ,] = useCloseModal();
+  const [closeModal, reload] = useCloseModal();
 
   const overtimeFormHandler = async (
     e: React.MouseEvent<HTMLButtonElement>
@@ -23,6 +23,7 @@ const OvertimeForm = (props: TOvertimeProps) => {
     e.preventDefault();
     createOvertimeInFirebase(overtimeValue.toString(), id);
     closeModal();
+    reload();
   };
 
   const incrementHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
