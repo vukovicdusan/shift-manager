@@ -12,6 +12,7 @@ import { deleteShiftFromFirebase } from "@/helpers/shiftHandlers/deleteShiftFrom
 import { useCloseModal } from "@/hooks/useCloseModal";
 import { formatMyDate } from "@/helpers/formatMyDate";
 import Center from "@/components/Center/Center";
+import { shiftDateLimiter } from "@/helpers/shiftDateLimiter";
 
 const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
   const {
@@ -39,6 +40,7 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
     overtimeAuthorization,
     overtimeAuthorizationHandler,
   ] = useShiftForm();
+  console.log(start, end);
 
   const addShiftHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,8 +54,8 @@ const AddShiftForm = ({ workers }: { workers: WorkersCollectionType[] }) => {
     await editShiftInFirebase(
       id,
       editedDate.start,
-      editedDate.end,
-      shiftType,
+      shiftDateLimiter(editedDate.end),
+      shiftType !== "" ? shiftType : classNames[0],
       overtimeAuthorization ?? overtimeAuthorization
     );
     closeModal();

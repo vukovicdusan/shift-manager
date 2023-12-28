@@ -11,7 +11,7 @@ export const editShiftInFirebase = async (
   overtimeAuthorization: boolean
 ) => {
   const shiftRef = doc(db, "shifts", shiftId);
-
+  console.log(start, " ", end, " ", shiftType, " ", overtimeAuthorization);
   try {
     let editedShiftData = {
       start:

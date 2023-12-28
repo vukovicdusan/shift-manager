@@ -5,7 +5,7 @@ import React, { ChangeEvent, use, useState } from "react";
 const useShiftForm = () => {
   const { start, end } = useAppSelector((state) => state.modal.data);
   const [assignedWorkers, setAssignedWorkers] = useState<string[]>([]);
-  const [shiftType, setShiftType] = useState<string>("day");
+  const [shiftType, setShiftType] = useState<string>("");
   const [editedDate, setEditedDate] = useState({ start: start, end: end });
   const [overtimeAuthorization, setOvertimeAuthorization] =
     useState<boolean>(false);
